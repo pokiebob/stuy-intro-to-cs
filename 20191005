@@ -1,0 +1,19 @@
+;1
+(define (f x) (if (<= x 3) 2 (+ (- (expt x 2) (* 3 x)) 8)) )
+(f 3)
+(f 4)
+
+;2
+(define (Div23 int) (or (integer? (/ int 2)) (integer? (/ int 3))))
+(Div23 3)
+(Div23 8)
+(Div23 6)
+(Div23 35)
+
+;3
+(define (fred me) (if (< me 0) 0 (if (and (>= me 0) (integer? (/ me 5))) 5 23)))
+(fred -1)
+(fred 5)
+(fred 1)
+
+;4
