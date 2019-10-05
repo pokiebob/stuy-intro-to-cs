@@ -5,11 +5,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;1
 (define (f x) (if (<= x 3) 2 (+ (- (expt x 2) (* 3 x)) 8)) )
+
+;Test 1
 (f 3)
 (f 4)
 
 ;2
 (define (Div23 int) (or (integer? (/ int 2)) (integer? (/ int 3))))
+
+;Test 2
 (Div23 3)
 (Div23 8)
 (Div23 6)
@@ -17,8 +21,42 @@
 
 ;3
 (define (fred me) (if (< me 0) 0 (if (and (>= me 0) (integer? (/ me 5))) 5 23)))
+
+;Test 3
 (fred -1)
 (fred 5)
 (fred 1)
 
 ;4
+(define (ToNavyTime hour ampm) (if (= hour 12) (if (= ampm 0) 0 12) (if (= ampm 0) hour (+ hour 12))))
+
+;Test 4
+(ToNavyTime 11 0)
+(ToNavyTime 1 1)
+(ToNavyTime 12 0)
+(ToNavyTime 12 1)
+
+;5
+(define (quadform a b c) (/ (- (sqrt (- (expt b 2) (* 4 a c))) b) (* 2 a)))
+(define (biggie a b c) (if (positive? a) (quadform a b c) (quadform (* -1 a) (* -1 b) (* -1 c))))
+
+;Test 5
+(biggie -2 3 9)
+
+;6. Challenge Problem
+(define (Detect12 hour) (* (round (/ hour 23)) 12))
+(define (ToNavyTime hour ampm) (- (+ hour (* 12 ampm)) (Detect12 hour)))
+
+;Test 6
+(ToNavyTime 11 0) ;expect 11
+(ToNavyTime 1 1) ;expect 13
+(ToNavyTime 12 0) ;expect 0
+(ToNavyTime 12 1) ;expect 12
+
+
+;7. Challenge Problem
+(define (SmallestDivisor N) (if (integer? (/ N 2)) 2 (if (integer? (/ N 3)) 3 (if (integer? (/ N 5)) 5 (if (integer? (/ N 7)) 7)))))
+
+;Test 7
+(SmallestDivisor 24)
+(SmallestDivisor 25)
