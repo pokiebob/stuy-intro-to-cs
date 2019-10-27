@@ -1,0 +1,49 @@
+extensions [sound]
+
+globals [clock]
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; netlogo-play-notes.nlogo
+;;;
+;;; TO RUN 
+;;; clear-all
+;;; play-c-major-scale
+;;; or 
+;;; play-bach-prelude
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; NOTES
+;;; https://en.scratch-wiki.info/wiki/MIDI_Notes#targetText=To%20change%20octaves%2C%20simply%20add,A4%20being%20440%20Hz.
+;;; Middle C is key number 60. 
+;;; C   D  E  F  G etc
+;;; 60  62 64 65 67
+to-report c-major-scale
+  report [60 62 64 65 67 69 71 72]
+end
+
+to play-note [pitch vel dur]
+  ;;; sound:play-note instrument keynumber velocity duration
+  sound:play-note-later clock "VIOLIN" pitch vel dur
+  rest dur
+end
+
+to rest [dur]
+  set clock clock + dur
+end
+
+to play-c-major-scale
+  foreach c-major-scale [ x -> play-note x 50 .25 ] ;;; .25 is quarter beat
+end
+
+to play-bach-prelude
+ ;;; Beats 
+ let whole 1
+ let half .5
+ let quarter .25
+  
+ play-note 60 50 quarter
+ play-note 62 50 quarter
+ play-note 64 50 quarter
+ play-note 65 50 quarter
+ play-note 67 50 quarter
+end
