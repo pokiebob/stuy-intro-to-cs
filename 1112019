@@ -1,0 +1,18 @@
+to setupwildapple
+  ca
+  reset-ticks
+  crt 1 [
+    set shape "rectangle"
+    set size 3
+  ]
+end
+to runthatapple
+ask turtles [
+    set color random 140
+    set size random 20
+    fd random 1000
+    rt random 360
+    stamp
+  ]
+  tick
+end
