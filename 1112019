@@ -1,3 +1,22 @@
+to setupapplestampers
+  ca
+  reset-ticks
+  crt 1 [
+    set size 2
+  ]
+end
+to runapplestampers
+ask turtles [
+    ifelse xcor > 0 
+    [ifelse ycor > 0 [set color yellow] [set color blue]]
+    [ifelse ycor > 0 [set color red] [set color green]]
+    fd 1
+    rt random 15
+    lt random 15
+    stamp
+  ]
+  tick
+end
 to setupwildapple
   ca
   reset-ticks
@@ -15,4 +34,55 @@ ask turtles [
     stamp
   ]
   tick
+end
+to setupapplecircle
+  ca
+  reset-ticks
+  crt 10 [
+    set color red
+  ]
+end
+to runapplecircle
+  ask turtles [
+    fd 1
+    rt random 15
+    lt random 15
+    if distancexy 0 0 >= (applesize - .2) and distancexy 0 0 <= (applesize + .2) [
+      stamp
+    ]
+  ]
+  tick
+end
+to setupappleroller
+  ca
+  reset-ticks
+  cro 1 [
+    set heading 180
+    fd applerollersize / 2
+    set color white
+    set size 2
+    pd
+    rt 90
+    fd 100
+    die
+  ]
+  crt 1 [
+    set color red
+    set heading 0
+    set size applerollersize
+    set shape "apple"
+  ]
+  cro 1 [
+    fd 5
+    print "I am sorry about the floating apple, they didn't draw it as a circle :("
+    die
+  ]
+end
+to rollapple
+  ask turtles [
+    set xcor xcor + .1
+    set heading heading + (.1 * 360) / (pi * applerollersize)
+  ]
+  tick
+    
 end
