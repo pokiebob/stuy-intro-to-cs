@@ -1,0 +1,73 @@
+to setupapples
+  ca
+  reset-ticks
+  ask patches[
+    set pcolor gray
+  ]
+  crt 2000[
+    set size .5
+    set color green
+    set shape "apple"
+    setxy random-xcor random-ycor
+  ]
+end
+to righthalfapples
+  ask turtles[
+    if xcor > 0
+    [ifelse random 100 < percent-red
+      [set color red]
+      [set color blue]
+    ]
+  ]
+  tick
+end
+to circle-apples
+  ask turtles[
+    ifelse distancexy 0 0 < apple-radius
+    [ifelse random 100 < percent-red
+      [set color red]
+      [set color blue]
+    ]
+    [set color green]
+  ]
+  tick
+end
+to setupappletrees
+  ca
+  reset-ticks
+  ask patches[
+    set pcolor gray
+  ]
+  show "My screen is smaller but my apple trees are still better :P"
+  crt 10[
+    set color red
+    set shape "apple"
+    respawn
+  ]
+end
+to circleappletrees
+  ask patches[
+    ifelse distancexy 0 0 < apple-radius or (pxcor < apple-radius / 4 and pxcor > apple-radius / -4 and pycor < 0 and pycor > apple-radius * -2)
+    [ifelse random 100 < percent-red
+      [set pcolor red]
+      [set pcolor blue]
+    ]
+    [set pcolor gray]
+  ]
+  ask turtles[
+    set heading 180
+    fd apple-radius / 16
+    set size apple-radius / 5
+    if ycor < -2 * apple-radius or ycor > apple-radius
+    [respawn]
+  ]
+  tick
+end
+to respawn
+    ifelse random 2 = 0
+    [set xcor random apple-radius]
+    [set xcor random apple-radius * -1]
+    ifelse random 2 = 0
+    [set ycor random apple-radius]
+    [set ycor random apple-radius]
+end
