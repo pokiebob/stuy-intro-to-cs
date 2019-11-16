@@ -11,6 +11,7 @@ to setupapples
     setxy random-xcor random-ycor
   ]
 end
+
 to righthalfapples
   ask turtles[
     if xcor > 0
@@ -21,6 +22,7 @@ to righthalfapples
   ]
   tick
 end
+
 to circle-apples
   ask turtles[
     ifelse distancexy 0 0 < apple-radius
@@ -32,6 +34,7 @@ to circle-apples
   ]
   tick
 end
+
 to setupappletrees
   ca
   reset-ticks
@@ -45,6 +48,7 @@ to setupappletrees
     respawn
   ]
 end
+
 to circleappletrees
   ask patches[
     ifelse distancexy 0 0 < apple-radius or (pxcor < apple-radius / 4 and pxcor > apple-radius / -4 and pycor < 0 and pycor > apple-radius * -2)
@@ -63,11 +67,13 @@ to circleappletrees
   ]
   tick
 end
+
 to respawn
     ifelse random 2 = 0
-    [set xcor random apple-radius]
-    [set xcor random apple-radius * -1]
+       [set xcor random apple-radius]
+       [set xcor random apple-radius * -1]
+  
     ifelse random 2 = 0
-    [set ycor random apple-radius]
-    [set ycor random apple-radius]
+       [set ycor random apple-radius]
+       [set ycor random apple-radius * -1]
 end
