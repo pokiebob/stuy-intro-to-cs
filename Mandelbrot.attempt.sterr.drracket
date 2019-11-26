@@ -1,0 +1,39 @@
+(define (prob3 n a b)
+  (1)
+  )
+                       
+
+
+(define (mandelbrot n a b oldA oldB)
+  (if (< n 25)
+      (if (<= (modulus a b) 2)
+    (mandelbrot (+ n 1) (newA a b oldA) (newB a b oldB) oldA oldB)
+    n
+    )
+      25
+      )
+  )
+
+(define (newA a b oldA)
+  (+ (expt a 2) oldA (* -1 (expt b 2)))
+  )
+
+(define (newB a b oldB)
+  (+ (* 2 a b) oldB)
+  )
+(define (modulus a b) (sqrt (+ (expt a 2) (expt b 2)
+                            )
+                      )
+)
+
+
+
+;(mandelbrot 1 -.3 .84 -.3 .84)
+;(mandelbrot 1 1 0)
+;(modfn 1 1 0)
+;(modfn 1 -1.6 1.2)
+;(real 1 1)
+;(real 2 1)
+;(modulus 3 4)
+;(modulus 1 0)
+;(real 5 3)
