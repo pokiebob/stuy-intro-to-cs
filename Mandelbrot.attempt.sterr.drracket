@@ -1,39 +1,57 @@
-(define (prob3 n a b)
-  (1)
+;;;;;          CYRUS CURSETJEE          ;;;;;
+;;;;; Honors Algebra II / Trigonometry  ;;;;;
+;;;;;             Mr. Sterr             ;;;;;
+;;;;;         December 4, 2019          ;;;;;
+
+
+;Returns the mandelbrot function where "a" increases by 0.02 [-2,1]
+(define (prob3 mina maxa b)
+  (display (/ (round (* mina 100)) 100))
+  (display ": ")
+  (display (simplemandel mina b))
+  (display "  ")
+  (if (< mina maxa)
+      (prob3 (+ mina .02) maxa b)
+      (display "apple")
+      )
   )
                        
+;Facilitates the calling of function mandelbrot
+(define (simplemandel a b) (mandelbrot 1 a b a b))
 
-
+;Returns the largest natural number "n" such that the modulus of mandelbrot(n) is less than 2
 (define (mandelbrot n a b oldA oldB)
   (if (< n 25)
       (if (<= (modulus a b) 2)
     (mandelbrot (+ n 1) (newA a b oldA) (newB a b oldB) oldA oldB)
     n
     )
+      ;Because we don't want our computers to crash, it is assumed that once n reaches 25, a+bi is part of the mandelbrot set
       25
       )
   )
 
+;After running through the mandelbrot function, this allows us to define the new value of the real part, while still storing the initial real part in a different variable.
 (define (newA a b oldA)
   (+ (expt a 2) oldA (* -1 (expt b 2)))
   )
 
+;Similarly to the newA function, this allows us to define the new value of the imaginary part
 (define (newB a b oldB)
   (+ (* 2 a b) oldB)
   )
-(define (modulus a b) (sqrt (+ (expt a 2) (expt b 2)
+
+;Returns the modulus, or distance from zero of a given imaginary number
+(define (modulus a b)
+  (sqrt (+ (expt a 2) (expt b 2)
                             )
                       )
 )
 
-
-
-;(mandelbrot 1 -.3 .84 -.3 .84)
-;(mandelbrot 1 1 0)
-;(modfn 1 1 0)
-;(modfn 1 -1.6 1.2)
-;(real 1 1)
-;(real 2 1)
-;(modulus 3 4)
-;(modulus 1 0)
-;(real 5 3)
+;To test results of each problem
+;(prob3 -2 1 .38)
+;(prob3 -2 1 .36)
+;(prob3 -2 1 .34)
+;(prob3 -2 1 .32)
+;(prob3 -2 1 .3)
+;(prob3 -2 1 .28)
