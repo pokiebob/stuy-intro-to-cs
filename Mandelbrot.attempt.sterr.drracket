@@ -4,13 +4,14 @@
 ;;;;;         December 4, 2019          ;;;;;
 
 
+
 ;Returns the mandelbrot function where "minA" increases by 0.02 [-2,1] (Problem 3)
 (define (prob3 minA maxA b)
   ;This part is for organization
   (display (r100th minA))
   (display ": ")
   (display (simplemandel minA b))
-  (display "   ")
+  (display "\n")
   ;This returns each maximum n as a"" increases by 0.02 and stops once it reaches the maximum value of "a"
   (if (< minA maxA)
       (prob3 (+ minA .02) maxA b)
@@ -22,12 +23,12 @@
 (define (simplemandel a b) (mandelbrot 1 a b a b))
 
 ;Returns the largest natural number "n" such that the modulus of mandelbrot(n) is less than 2
-(define (mandelbrot n a b oldA oldB)
-  ;The following display commands are only to be used to view the results of each iteration (problem 1), DO NOT USE FOR PROBLEM 3.
-  ;(display n) (display ": Number= ") (display (+ (r100th a) (* (r100th b) (sqrt -1)))) (display "  Modulus= ") (display (r100th (modulus a b))) (display "   ")
+(define (mandelbrot n a b initialA initialB)
+  ;Only use display-iteration for problem 1, DO NOT USE FOR PROBLEM 3.
+  ;(display-iteration n a b)
   (if (< n 25)
       (if (<= (modulus a b) 2)
-          (mandelbrot (+ n 1) (newA a b oldA) (newB a b oldB) oldA oldB)
+          (mandelbrot (+ n 1) (newA a b initialA) (newB a b initialB) initialA initialB)
     n
     )
       ;Because we don't want our computers to crash, it is assumed that once n reaches 25, a+bi is part of the mandelbrot set
@@ -36,13 +37,13 @@
   )
 
 ;After running through the mandelbrot function, this allows us to define the new value for the real part, while still storing the initial real part in a different variable.
-(define (newA a b oldA)
-  (+ (expt a 2) oldA (* -1 (expt b 2)))
+(define (newA a b initialA)
+  (+ (expt a 2) initialA (* -1 (expt b 2)))
   )
 
 ;Similarly to the newA function, this allows us to define the new value of the imaginary part
-(define (newB a b oldB)
-  (+ (* 2 a b) oldB)
+(define (newB a b initialB)
+  (+ (* 2 a b) initialB)
   )
 
 ;Returns the modulus, or distance from zero of a given imaginary number
@@ -57,9 +58,32 @@
   (/ (round (* x 100)) 100)
   )
 
+;Function to display the number and modulus of each iteration (Problem 1)
+(define (display-iteration n a b)
+  (display n)
+  (display ": Number= ")
+  (display (+ (r100th a) (* (r100th b) (sqrt -1))))
+  (display "  Modulus= ")
+  (display (r100th (modulus a b)))
+  (display "\n")
+)
+
 
 ;To test results, delete ";" and run.
+
+;The first three commands are for Problem 1
+;Activate display-iteration function under mandelbrot to view each iteration
+;Note that to do 60 iterations instead of 25, you must edit the mandelbrot function
+
+;The rest of the commands are for Problem 3
+;When running these commands, I would
+;*** S T R O N G L Y   R E C O M M E N D ***
+;commenting out display-iteration for your computer's well-being :)
+
+
 ;(simplemandel -.7 .15)
+;(simplemandel .5 .5)
+;(simplemandel -1.0404 0.2509)
 ;(prob3 -2 1 .38)
 ;(prob3 -2 1 .36)
 ;(prob3 -2 1 .34)
