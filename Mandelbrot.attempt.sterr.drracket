@@ -4,15 +4,17 @@
 ;;;;;         December 4, 2019          ;;;;;
 
 
-;Returns the mandelbrot function where "a" increases by 0.02 [-2,1]
-(define (prob3 mina maxa b)
-  (display (/ (round (* mina 100)) 100))
+;Returns the mandelbrot function where "minA" increases by 0.02 [-2,1] (Problem 3)
+(define (prob3 minA maxA b)
+  ;This part is for organization
+  (display (r100th minA))
   (display ": ")
-  (display (simplemandel mina b))
-  (display "  ")
-  (if (< mina maxa)
-      (prob3 (+ mina .02) maxa b)
-      (display "apple")
+  (display (simplemandel minA b))
+  (display "   ")
+  ;This returns each maximum n as a"" increases by 0.02 and stops once it reaches the maximum value of "a"
+  (if (< minA maxA)
+      (prob3 (+ minA .02) maxA b)
+      (display "Mr. Sterr please accept my apples :(")
       )
   )
                        
@@ -21,9 +23,11 @@
 
 ;Returns the largest natural number "n" such that the modulus of mandelbrot(n) is less than 2
 (define (mandelbrot n a b oldA oldB)
+  ;The following display commands are only to be used to view the results of each iteration (problem 1), DO NOT USE FOR PROBLEM 3.
+  ;(display n) (display ": Number= ") (display (+ (r100th a) (* (r100th b) (sqrt -1)))) (display "  Modulus= ") (display (r100th (modulus a b))) (display "   ")
   (if (< n 25)
       (if (<= (modulus a b) 2)
-    (mandelbrot (+ n 1) (newA a b oldA) (newB a b oldB) oldA oldB)
+          (mandelbrot (+ n 1) (newA a b oldA) (newB a b oldB) oldA oldB)
     n
     )
       ;Because we don't want our computers to crash, it is assumed that once n reaches 25, a+bi is part of the mandelbrot set
@@ -31,7 +35,7 @@
       )
   )
 
-;After running through the mandelbrot function, this allows us to define the new value of the real part, while still storing the initial real part in a different variable.
+;After running through the mandelbrot function, this allows us to define the new value for the real part, while still storing the initial real part in a different variable.
 (define (newA a b oldA)
   (+ (expt a 2) oldA (* -1 (expt b 2)))
   )
@@ -48,10 +52,18 @@
                       )
 )
 
-;To test results of each problem
+;Function for rounding to the nearest hundredth
+(define (r100th x)
+  (/ (round (* x 100)) 100)
+  )
+
+
+;To test results, delete ";" and run.
+;(simplemandel -.7 .15)
 ;(prob3 -2 1 .38)
 ;(prob3 -2 1 .36)
 ;(prob3 -2 1 .34)
 ;(prob3 -2 1 .32)
 ;(prob3 -2 1 .3)
 ;(prob3 -2 1 .28)
+
