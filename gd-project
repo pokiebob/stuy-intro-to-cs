@@ -183,7 +183,7 @@ to go
       ]
     ]
     
-    let l [
+    let dryout-tubes [
       [13.12 13.14]
       [13.24 13.26]
       [13.36 13.38]
@@ -218,7 +218,7 @@ to go
       [17.50 17.52]
     ]
     
-    if in-range l
+    if in-range dryout-tubes
     [
       create-objects 1 [
         block "tube"
@@ -597,32 +597,35 @@ to go
         rt 90
       ]
     ]
-    if (percentage > 26.39 and percentage < 26.41)
-    or (percentage > 26.52 and percentage < 26.54)
-    or (percentage > 26.64 and percentage < 26.66)
-    or (percentage > 26.77 and percentage < 26.78)
-    or (percentage > 27.27 and percentage < 27.29)
-    or (percentage > 27.39 and percentage < 27.41)
-    or (percentage > 27.52 and percentage < 27.54)
-    or (percentage > 27.64 and percentage < 27.66)
-    or (percentage > 28.14 and percentage < 28.16)
-    or (percentage > 28.27 and percentage < 28.29)
-    or (percentage > 28.39 and percentage < 28.41)
-    or (percentage > 28.52 and percentage < 28.54)
-    or (percentage > 29.02 and percentage < 29.04)
-    or (percentage > 29.14 and percentage < 29.16)
-    or (percentage > 29.27 and percentage < 29.29)
-    or (percentage > 29.39 and percentage < 29.41)
-    or (percentage > 29.89 and percentage < 29.92)
-    or (percentage > 30.02 and percentage < 30.05)
-    or (percentage > 30.15 and percentage < 30.18)
-    or (percentage > 30.28 and percentage < 30.30)
-    or (percentage > 30.79 and percentage < 30.81)
-    or (percentage > 30.92 and percentage < 30.94)
-    or (percentage > 31.04 and percentage < 31.06)
-    or (percentage > 31.17 and percentage < 31.19)
-    or (percentage > 31.29 and percentage < 31.31)
-    or (percentage > 31.42 and percentage < 31.44)
+    let ship-tube-ranges [
+      [26.39 26.41]
+      [26.52 26.54]
+      [26.64 26.66]
+      [26.77 26.78]
+      [27.27 27.29]
+      [27.39 27.41]
+      [27.52 27.54]
+      [27.64 27.66]
+      [28.14 28.16]
+      [28.27 28.29]
+      [28.39 28.41]
+      [28.52 28.54]
+      [29.02 29.04]
+      [29.14 29.16]
+      [29.27 29.29]
+      [29.39 29.41]
+      [29.89 29.92]
+      [30.02 30.05]
+      [30.15 30.18]
+      [30.28 30.30]
+      [30.79 30.81]
+      [30.92 30.94]
+      [31.04 31.06]
+      [31.17 31.19]
+      [31.29 31.31]
+      [31.42 31.44]
+    ]
+    if in-range ship-tube-ranges
     [
       create-objects 1 [
         block "tube"
@@ -1207,7 +1210,6 @@ to background [input]
 end
 
 to-report in-range [l]
-	
 	let i 0
 	while [i < length l] [
 		let low item 0 (item i l)
