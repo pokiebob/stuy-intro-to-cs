@@ -1,0 +1,1230 @@
+globals [my-cs-grade bad speed jump-x percentage counter letters gravity shape-version dust-value blast flip ball-x initial-y]
+turtles-own [important fade-in?]
+breed [objects object]
+breed [particles particle]
+
+to setup
+  ca
+  phone
+  addicted-to-gd
+  swipe
+  back-button
+  info
+  top
+  set speed 1
+  set jump-x -10
+  set percentage 0
+  set counter 1
+  set my-cs-grade 55
+  set bad 55
+  set gravity 0
+  set dust-value 0
+end
+
+to go
+;  ask turtle 6 [lol]
+;  zoom-in 0
+  ct
+  background (105)
+;  wait 1
+;  repeat 27 [level "I May have skipped a level" wait .075 set counter counter + 1]
+;  wait 1
+;  repeat 6 [level "Or two" wait .1 set counter counter + 1]
+;  wait 1
+;  repeat 18 [level "Ok maybe more lmao" wait .05 set counter counter + 1]
+  wait 1
+;  set counter 1
+  repeat 10 [level "Attempt 1" wait .1 set counter counter + 1]
+  wait 1
+  cro 1 [
+    set important 1
+    ground
+    set shape "icon"
+    set color yellow
+    set size 4
+    wait .1
+    hide-turtle
+    wait .1
+    show-turtle
+    set size 5
+  ]
+  create-particles 1 [
+    set heading 0
+    set important 1
+    ground
+    set shape "dust1"
+    set color yellow
+    set size 5
+  ]
+  while [my-cs-grade = bad] [
+    ask particles [
+      ifelse gravity = 0 [
+        ifelse dust-value < 2 and dust-value >= 0 [set dust-value dust-value + .25] [set dust-value 0]
+      ]
+      [ifelse dust-value < 5 and dust-value >= 3 [set dust-value dust-value + .25] [set dust-value 3]
+      ]
+      if dust-value = 0 [dust-phase "0"]
+      if dust-value = 1 [dust-phase "1"]
+      if dust-value = 2 [dust-phase "2"]
+      if dust-value = 3 [dust-phase "3"]
+      if dust-value = 4 [dust-phase "4"]
+      if dust-value = 5 [dust-phase "5"]
+    ]
+    if percentage = 0 [
+      cro 1 [
+        normal-spike
+      ]
+    ]
+    if percentage >= 0 and percentage <= 1.25 [
+      level "Stereo Madness"
+      set counter counter + .25
+    ]
+    if percentage > 1.77 and percentage < 1.78 [
+      cro 1 [
+        mini-spike
+      ]
+    ]
+    if percentage > 1.89 and percentage < 1.9 [
+      cro 1 [
+        normal-spike
+      ]
+    ]
+    if percentage > 5 and percentage < 5.05 [
+      cro 1 [
+        jump-pad
+        set color 124
+      ]
+      background 125
+    ]
+    if percentage > 5 and percentage <= 6.25 [
+      level "Back On Track"
+      set counter counter + .25
+    ]
+    if (percentage > 5.15 and percentage < 5.17)
+    or (percentage > 5.3 and percentage < 5.32)
+    or (percentage > 5.45 and percentage < 5.47)
+    or (percentage > 5.6 and percentage < 5.62)
+    or (percentage > 5.75 and percentage < 5.77)
+    or (percentage > 5.9 and percentage < 5.92)
+    or (percentage > 6.05 and percentage < 6.07)
+    or (percentage > 8.6 and percentage < 8.62)
+    [cro 1
+      [
+      normal-spike
+      ]
+    ]
+    if percentage > 5.75 and percentage < 5.77 [
+     create-objects 1 [
+        normal-slab
+        set ycor ycor + 3
+      ]
+    ]
+    if (percentage >= 8 and percentage < 8.02) [
+      background green
+      cro 1 [
+        block ""
+        set ycor ycor + 3
+      ]
+      cro 1 [
+        normal-spike
+        set ycor ycor + 5.75
+      ]
+    ]
+    if (percentage >= 8 and percentage <= 8.95) [
+      level "Polargeist"
+      set counter counter + .25
+    ]
+    if (percentage > 8.75 and percentage < 8.77)
+    or (percentage > 9.8 and percentage < 9.82)
+    [
+      create-objects 1 [
+        block ""
+        set ycor ycor + 2.5
+      ]
+      cro 1 [
+        grid ""
+      ]
+    ]
+    if (percentage > 9.35 and percentage < 9.37) [
+      cro 1 [
+        orb
+        set ycor ycor + 4
+      ]
+    ]
+    if (percentage >= 12 and percentage <= 12.65) [
+      background 3.2
+      level "Dry Out"
+      set counter counter + .25
+    ]
+    if (percentage > 13 and percentage < 13.02) [
+      cro 1 [
+        portal yellow
+      ]
+      create-objects 1 [
+        block "edge"
+        set ycor ycor + 6
+        hatch 1 [
+          block "tube"
+          set ycor ycor + 8.6
+          hatch 1 [
+            set ycor ycor + 2.6
+            hatch 1 [
+              set ycor ycor + 2.6
+              hatch 1 [
+                set ycor ycor + 2.6
+              ]
+            ]
+          ]
+        ]
+      ]
+      create-objects 1 [
+        block "corner"
+        set ycor 14
+      ]
+    ]
+    
+    let l [
+      [13.12 13.14]
+      [13.24 13.26]
+      [13.36 13.38]
+      [13.48 13.51]
+      [13.61 13.63]
+      [13.74 13.76]
+      [13.86 13.88]
+      [13.99 14.01]
+      [14.11 14.13]
+      [14.24 14.26]
+      [14.50 14.52]
+      [14.62 14.64]
+      [14.74 14.76]
+      [14.87 14.89]
+      [15.00 15.02]
+      [15.12 15.14]
+      [15.37 15.39]
+      [15.50 15.52]
+      [15.62 15.64]
+      [15.75 15.77]
+      [15.87 15.90]
+      [15.99 16.01]
+      [16.12 16.14]
+      [16.25 16.27]
+      [16.37 16.39]
+      [16.50 16.52]
+      [16.62 16.64]
+      [16.87 16.89]
+      [17.00 17.02]
+      [17.12 17.14]
+      [17.37 17.39]
+      [17.50 17.52]
+    ]
+    
+    if in-range l
+    [
+      create-objects 1 [
+        block "tube"
+        set heading 90
+        set ycor 14
+      ]
+    ]
+    if (percentage > 14.37 and percentage < 14.39)
+    or (percentage > 15.25 and percentage < 15.27)
+    [
+      create-objects 1 [
+        block "opening"
+        set heading 180
+        set ycor 14
+      ]
+      create-objects 1 [
+        block "tube"
+        set ycor 11.4
+      ]
+      create-objects 1 [
+        block "edge"
+        set ycor 8.8
+      ]
+      cro 1 [
+        normal-spike
+        set ycor 3.6
+      ]
+      create-objects 1 [
+        block ""
+        set ycor 1
+      ]
+    ]
+    if (percentage > 15.87 and percentage < 15.89)
+    or (percentage > 16.50 and percentage < 16.52)
+    or (percentage > 16.62 and percentage < 16.64)
+    or (percentage > 17.37 and percentage < 17.39)
+    or (percentage > 17.50 and percentage < 17.52)
+    or (percentage > 17.62 and percentage < 17.64)
+    [
+      cro 1 [
+        normal-spike
+        set ycor 11.4
+        set heading 180
+      ]
+    ]
+    if (percentage > 16.75 and percentage < 16.77)
+    [
+      create-objects 1 [
+        block "opening"
+        set heading 180
+        set ycor 14
+      ]
+      create-objects 1 [
+        block "edge"
+        set ycor 11.4
+      ]
+    ]
+    if (percentage > 17.25 and percentage < 17.27)
+    [
+      create-objects 1 [
+        block "opening"
+        set heading 180
+        set ycor 14
+      ]
+      create-objects 1 [
+        block "tube"
+        set ycor 11.4
+      ]
+      create-objects 1 [
+        block "edge"
+        set ycor 8.8
+      ]
+    ]
+    if (percentage > 17.62 and percentage < 17.64)
+    [
+      create-objects 1 [
+        block "edge"
+        set ycor 14
+        set heading 270
+      ]
+      cro 1 [
+        portal magenta
+        set ycor 3.6
+      ]
+    ]
+    if (percentage > 14.25 and percentage < 18) [
+      background 64
+      ask objects [set color 52]
+      ask turtles with [shape = "block edge"] [set shape "grid edge"]
+      ask turtles with [shape = "block tube"] [set shape "grid tube"]
+      ask turtles with [shape = "block corner"] [set shape "grid corner"]
+      ask turtles with [shape = "block opening"] [set shape "grid opening"]
+    ]
+    if (percentage > 18.91 and percentage < 18.93)
+    [
+      ask patches [set pcolor 124 - pycor / 5]
+    ]
+    if (percentage > 19 and percentage < 20.45) [
+      level "Base After Base"
+      set counter counter + .25
+    ]
+    if (percentage > 20 and percentage < 20.03)
+    [
+      cro 1 [
+        mini-spike
+        lt 90
+        set ycor -15
+        hatch 1 [
+          set ycor ycor + 2.6
+          hatch 1 [
+            set ycor ycor + 2.6
+          ]
+        ]
+      ]
+      cro 1 [
+        mini-spike
+        lt 90
+        set ycor 15
+        hatch 1 [
+          set ycor ycor - 2.6
+          hatch 1 [
+            set ycor ycor - 2.6
+          ]
+        ]
+      ]
+    ]
+    if (percentage > 20.13 and percentage < 20.15)
+    [
+      cro 1 [
+        grid "tube"
+        set color 124
+        set ycor -15
+        hatch 1 [
+          set ycor ycor + 2.6
+        ]
+      ]
+      cro 1 [
+        grid "edge"
+        set color 124
+        set ycor -9.8
+        set heading 180
+      ]
+      cro 1 [
+        grid "tube"
+        set color 124
+        set ycor 15
+        hatch 1 [
+          set ycor ycor - 2.6
+        ]
+      ]
+      cro 1 [
+        grid "edge"
+        set color 124
+        set ycor 9.8
+      ]
+    ]
+    if (percentage > 21.43 and percentage < 21.45)
+    [
+      cro 1 [
+        mini-spike
+        lt 90
+        set ycor -12.4
+        hatch 1 [
+          set ycor ycor + 2.6
+          hatch 1 [
+            set ycor ycor + 2.6
+            hatch 1 [
+              set ycor 12.4
+            ]
+          ]
+        ]
+      ]
+    ]
+    if (percentage > 21.56 and percentage < 21.58)
+    [
+      cro 1 [
+        grid "tube"
+        set color 124
+        set ycor -15
+        hatch 1 [
+          set ycor ycor + 2.6
+          hatch 1 [
+            set ycor ycor + 2.6
+            hatch 1 [
+              set ycor 15
+            ]
+          ]
+        ]
+      ]
+      cro 1 [
+        grid "edge"
+        set color 124
+        set ycor 12.4
+        hatch 1 [
+          rt 180
+          set ycor -7.2
+        ]
+      ]
+    ]
+    if (percentage > 22.86 and percentage < 22.88)
+    [
+      cro 1 [
+        mini-spike
+        lt 90
+        set ycor 4.6
+        hatch 1 [
+          set ycor ycor + 2.6
+          hatch 1 [
+            set ycor ycor + 2.6
+          ]
+        ]
+      ]
+    ]
+    if (percentage > 22.99 and percentage < 23.01)
+    [
+      cro 1 [
+        grid "tube"
+        set color 124
+        set ycor 15
+        hatch 1 [
+          set ycor ycor - 2.6
+          hatch 1 [
+            set ycor ycor - 2.6
+            hatch 1 [
+              set ycor ycor - 2.6
+            ]
+          ]
+        ]
+      ]
+      cro 1 [
+        grid "edge"
+        set color 124
+        set ycor 4.6
+        hatch 1 [
+          rt 180
+          set ycor -15
+        ]
+      ]
+    ]
+    if (percentage > 24.29 and percentage < 24.31)
+    [
+      cro 1 [
+        mini-spike
+        lt 90
+        set ycor -12.4
+        hatch 1 [
+          set ycor ycor + 2.6
+          hatch 1 [
+            set ycor 12.4
+            hatch 1 [
+              set ycor ycor - 2.6
+            ]
+          ]
+        ]
+      ]
+    ]
+    if (percentage > 24.42 and percentage < 24.44)
+    [
+      cro 1 [
+        grid "tube"
+        set ycor -15
+        set color 124
+        hatch 1 [
+          set ycor ycor + 2.6
+          hatch 1 [
+            set ycor 15
+            hatch 1 [
+              set ycor ycor - 2.6
+            ]
+          ]
+        ]
+      ]
+      cro 1 [
+        grid "edge"
+        set ycor 9.8
+        set color 124
+        hatch 1 [
+          set ycor -9.8
+          rt 180
+        ]
+      ]
+    ]
+    if (percentage > 26.00 and percentage < 27.15)
+    [
+      ask patches [set pcolor black]
+      level "Can't Let Go"
+      set counter counter + .25
+    ]
+    if (percentage > 26.00 and percentage < 26.03)
+    [
+      create-objects 1 [
+        block "tube"
+        set ycor -15
+        hatch 1 [
+          set ycor 15
+          hatch 1 [
+            set ycor 12.4
+          ]
+        ]
+      ]
+      create-objects 1 [
+        block "corner"
+        set ycor -12.4
+        hatch 1 [
+          set ycor 9.8
+          lt 90
+        ]
+      ]
+      cro 1 [
+        normal-spike
+        rt 180
+        set ycor 7.2
+      ]
+    ]
+    if (percentage > 26.13 and percentage < 26.15)
+    or (percentage > 27.89 and percentage < 27.91)
+    or (percentage > 29.64 and percentage < 29.66)
+    [
+      create-objects 1 [
+        block "tube"
+        rt 90
+        set ycor -12.4
+        hatch 1 [
+          set ycor 9.8
+        ]
+      ]
+      cro 1 [
+        normal-spike
+        rt 180
+        set ycor 7.2
+      ]
+    ]
+    if (percentage > 26.26 and percentage < 26.28)
+    or (percentage > 28.02 and percentage < 28.04)
+    or (percentage > 29.77 and percentage < 29.79)
+    [
+      create-objects 1 [
+        block "tube"
+        rt 90
+        set ycor -12.4
+      ]
+      create-objects 1 [
+        block "corner"
+        set ycor 12.4
+        hatch 1 [
+          set ycor ycor - 2.6
+          rt 180
+        ]
+      ]
+      cro 1 [
+        normal-spike
+        rt 180
+        set ycor 7.2
+      ]
+    ]
+    if (percentage > 27.77 and percentage < 27.79)
+    or (percentage > 29.52 and percentage < 29.54)
+    [
+      create-objects 1 [
+        block "corner"
+        set ycor 12.4
+        rt 90
+        hatch 1 [
+          set ycor ycor - 2.6
+          rt 180
+        ]
+      ]
+      cro 1 [
+        normal-spike
+        rt 180
+        set ycor 7.2
+      ]
+      create-objects 1 [
+        block "tube"
+        set ycor -12.4
+        rt 90
+      ]
+    ]
+    if (percentage > 26.39 and percentage < 26.41)
+    or (percentage > 26.52 and percentage < 26.54)
+    or (percentage > 26.64 and percentage < 26.66)
+    or (percentage > 26.77 and percentage < 26.78)
+    or (percentage > 27.27 and percentage < 27.29)
+    or (percentage > 27.39 and percentage < 27.41)
+    or (percentage > 27.52 and percentage < 27.54)
+    or (percentage > 27.64 and percentage < 27.66)
+    or (percentage > 28.14 and percentage < 28.16)
+    or (percentage > 28.27 and percentage < 28.29)
+    or (percentage > 28.39 and percentage < 28.41)
+    or (percentage > 28.52 and percentage < 28.54)
+    or (percentage > 29.02 and percentage < 29.04)
+    or (percentage > 29.14 and percentage < 29.16)
+    or (percentage > 29.27 and percentage < 29.29)
+    or (percentage > 29.39 and percentage < 29.41)
+    or (percentage > 29.89 and percentage < 29.92)
+    or (percentage > 30.02 and percentage < 30.05)
+    or (percentage > 30.15 and percentage < 30.18)
+    or (percentage > 30.28 and percentage < 30.30)
+    or (percentage > 30.79 and percentage < 30.81)
+    or (percentage > 30.92 and percentage < 30.94)
+    or (percentage > 31.04 and percentage < 31.06)
+    or (percentage > 31.17 and percentage < 31.19)
+    or (percentage > 31.29 and percentage < 31.31)
+    or (percentage > 31.42 and percentage < 31.44)
+    [
+      create-objects 1 [
+        block "tube"
+        rt 90
+        set ycor -12.4
+        hatch 1 [
+          set ycor 12.4
+        ]
+      ]
+    ]
+    if (percentage > 26.89 and percentage < 26.91)
+    or (percentage > 28.64 and percentage < 28.66)
+    or (percentage > 30.41 and percentage < 30.43)
+    [
+      create-objects 1 [
+        block "tube"
+        rt 90
+        set ycor 12.4
+      ]
+      create-objects 1 [
+        block "corner"
+        set ycor -9.8
+        hatch 1 [
+          rt 180
+          set ycor ycor - 2.6
+        ]
+      ]
+      cro 1 [
+        normal-spike
+        set ycor -7.2
+      ]
+    ]
+    if (percentage > 27.02 and percentage < 27.04)
+    or (percentage > 28.77 and percentage < 28.79)
+    or (percentage > 30.54 and percentage < 30.56)
+    [
+      create-objects 1 [
+        block "tube"
+        rt 90
+        set ycor 12.4
+        hatch 1 [
+          set ycor -9.8
+        ]
+      ]
+      cro 1 [
+        normal-spike
+        set ycor -7.2
+      ]
+    ]
+    if (percentage > 27.14 and percentage < 27.16)
+    or (percentage > 28.89 and percentage < 28.91)
+    or (percentage > 30.67 and percentage < 30.69)
+    [
+      create-objects 1 [
+        block "tube"
+        rt 90
+        set ycor 12.4
+      ]
+      create-objects 1 [
+        block "corner"
+        lt 90
+        set ycor -12.4
+        hatch 1 [
+          set ycor ycor + 2.6
+          rt 180
+        ]
+      ]
+      cro 1 [
+        normal-spike
+        set ycor -7.2
+      ]
+    ]
+    if (percentage > 31.54 and percentage < 31.56)
+    [
+      create-objects 1 [
+        block "corner"
+        set ycor -12.4
+        rt 180
+      ]
+      create-objects 1 [
+        block "edge"
+        set ycor 7.2
+        hatch 1 [
+          set ycor -7.2
+          rt 180
+        ]
+      ]
+      create-objects 1 [
+        block "tube"
+        set ycor 15
+        hatch 1 [
+          set ycor 9.8
+          hatch 1 [
+            set ycor -9.8
+          ]
+        ]
+      ]
+      create-objects 1 [
+        block "opening"
+        lt 90
+        set ycor 12.4
+      ]
+      cro 1 [
+        portal lime
+        set ycor 0
+      ]
+    ]
+
+    ask turtle 0 [
+      if (percentage > 6.97 and percentage <= 7)
+      or (percentage > 14.7 and percentage < 14.72)
+      or (percentage > 15.7 and percentage < 15.72)
+      or (percentage > 16.10 and percentage < 16.12)
+      or (percentage > 16.50 and percentage < 16.52)
+      or (percentage > 16.81 and percentage < 16.83)
+      or (percentage > 17.47 and percentage < 17.49)
+      or (percentage > 17.96 and percentage < 17.98)
+      or (percentage > 18.45 and percentage < 18.47)
+      [
+        recenter
+      ]
+      if (percentage > 16.50 and percentage < 16.52)
+      or (percentage > 16.81 and percentage < 16.83)
+      [
+        set ycor ycor - 1
+      ]
+      if (percentage >= 1.05 and percentage <= 1.545)
+      or (percentage >= 2.9 and percentage <= 3.4)
+      or (percentage > 7 and percentage <= 7.55)
+      or (percentage > 9.7 and percentage <= 11.055)
+      or (percentage > 11.2 and percentage < 11.4002)
+      or (percentage > 15.37 and percentage < 15.68)
+      or (percentage > 15.87 and percentage < 16.10)
+      or (percentage > 16.14 and percentage < 16.50)
+      or (percentage > 16.58 and percentage < 16.81)
+      or (percentage > 17.00 and percentage < 17.47)
+      or (percentage > 17.51 and percentage < 17.94)
+      or (percentage > 18.00 and percentage < 18.43)
+      or (percentage > 18.49 and percentage < 18.91)
+      [
+        reg-jump
+      ]
+      if (percentage >= 6.3 and percentage <= 6.97)
+      [
+        boost-jump
+      ]
+      if (percentage > 11.4 and percentage < 11.42)
+      [
+        ground
+      ]
+      if (percentage > 14.7 and percentage < 14.72)
+      [
+        set ycor 11.3
+      ]
+      if (percentage > 10.52 and percentage < 10.54)
+      [
+        recenter
+        set jump-x -11
+      ]
+      if (percentage > 11.2 and percentage < 11.22)
+      or (percentage > 15.85 and percentage < 15.87)
+      or (percentage > 16.37 and percentage < 16.45)
+      or (percentage > 16.50 and percentage < 16.52)
+      [
+        set jump-x 0
+      ]
+      if (percentage > 14.25 and percentage < 14.7)
+      [
+        set gravity 1
+        flip-gravity
+      ]
+      if (percentage > 18.91 and percentage < 18.93)
+      [
+        set gravity 0
+        set shape "ship"
+        set heading 0
+        set size 8
+      ]
+      if (percentage > 19.25 and percentage < 19.75)
+      or (percentage > 20.25 and percentage < 20.75)
+      or (percentage > 21.25 and percentage < 21.75)
+      or (percentage > 22.25 and percentage < 22.75)
+      or (percentage > 23.50 and percentage < 24.25)
+      or (percentage > 24.75 and percentage < 25.50)
+      or (percentage > 26.00 and percentage < 26.25)
+      or (percentage > 27.00 and percentage < 28.00)
+      or (percentage > 29.00 and percentage < 29.885)
+      or (percentage > 30.625 and percentage < 31.5)
+      or (percentage > 32.35 and percentage < 32.8)
+      [
+        set blast 1
+      ]
+      if (percentage > 19 and percentage < 32.8)
+      [
+        fly
+      ]
+      if (percentage > 35 and percentage < 38)
+      [
+        set flip 1
+      ]
+      update
+      if (percentage > 35 and percentage < 40)
+      [
+        ball
+      ]
+    ]
+    if (percentage > 14.25 and percentage < 35)
+    [
+      ask turtles with [xcor = 16] [
+        set fade-in? 1
+      ]
+      fade-in
+      fade-away
+    ]
+    ask turtle 1 [
+      set ycor [ycor] of turtle 0
+      ifelse object? or ground? or ceiling? or blast = 1 [
+        show-turtle
+      ]
+      [hide-turtle]
+    ]
+    ask turtles with [important = 0] [
+      set xcor xcor - .5 * speed
+      if xcor = -16 [die]
+    ]
+    set blast 0
+    set percentage percentage + .025 / speed
+    wait .025 / speed
+    if percentage > 38.00 [stop]
+  ]
+end
+
+to reg-jump
+  set jump-x jump-x + 1
+  ifelse gravity = 0 [rt 9] [lt 9]
+  ifelse jump-x < 0 [
+    set ycor ycor + velocity (0)/ 50
+  ]
+  [ifelse ground? or object? [
+    recenter
+    ]
+    [
+    set ycor ycor - velocity (0) / 50
+    ]
+  ]
+end
+
+to boost-jump
+  set jump-x jump-x + 1
+  rt 6
+  ifelse jump-x < 5 [
+    set ycor ycor + velocity (5) / 75
+  ]
+  [ifelse jump-x > 8 and (ground? or object?) [
+      recenter
+    ]
+    [
+    set ycor ycor - velocity (5) / 75
+    ]
+  ]
+end
+
+to flip-gravity
+  set jump-x jump-x + 1
+  ifelse gravity = 0 [rt 9] [lt 9]
+  ifelse jump-x < 5 [
+    set jump-x 4
+  ]
+  [ifelse gravity = 0 [
+      ifelse ground? or object? [
+        recenter
+    ]
+    [
+      set ycor ycor - velocity (0) / 200
+    ]
+    ]
+    [
+      ifelse ceiling? or object? [
+        recenter
+      ]
+      [
+        set ycor ycor - velocity (0) / 200
+      ]
+    ]
+  ]
+end
+
+to fly
+  ifelse blast = 0 [
+    if (heading < 45 or heading > 315) and ycor > -15 [
+      set heading heading + 1
+    ]
+  ]
+  [if (heading < 45 or heading > 315) and ycor < 15 [
+    set heading heading - 1
+    ]
+  ]
+  ifelse heading >= 315
+  [if ycor < 15 [set ycor ycor + (360 - heading) / 30]]
+  [if ycor > -15 [set ycor ycor - heading / 30]]
+  ifelse gravity = 0 [set shape "ship"] [set shape "ship upside-down"]
+  if ycor < -15 and heading > 0 [set heading heading - 2 set ycor -15.3]
+  if ycor > 15 and heading > 315 [set heading heading + 2 set ycor 15.3]
+end
+
+to ball
+  set ball-x ball-x + 1
+  if flip = 1 [
+    if ball-x = 0 [
+      set initial-y ycor
+      ifelse gravity = 0 [set gravity 1 set ycor ycor + .5] [set gravity 0 set ycor ycor - .5]
+    ]
+    ifelse gravity = 1 [
+      ifelse count objects-at xcor ycor + 1 < 2 and ycor < 15 and ycor > -15 [
+        ifelse ball-x < 10 [set ycor ycor + .2 * (ycor - initial-y) ^ 2] [set ycor ycor + .6]
+      ]
+      [set ball-x 0 set flip 0]
+    ]
+    [ifelse count objects-at xcor ycor - 1 < 2 and ycor < 15 and ycor > -15 [
+      ifelse ball-x < 10 [set ycor ycor - .2 * (ycor - initial-y) ^ 2] [set ycor ycor - .6]
+      ]
+      [set ball-x 0 set flip 0]
+    ]
+  ]
+  ifelse gravity = 0 [
+    rt 9
+  ]
+  [lt 9]
+end
+to-report ground?
+  ifelse ycor <= -4 [report true] [report false]
+end
+
+to-report ceiling?
+  ifelse ycor > 15 [report true] [report false]
+end
+
+to-report object?
+  ifelse count objects-here >= 1 or count objects-on neighbors >= 1
+  [report true]
+  [report false]
+end
+
+to-report velocity [h]
+  ifelse gravity = 0
+  [
+    report (jump-x - h) ^ 2
+  ]
+  [
+    report -1 * (jump-x - h) ^ 2
+  ]
+end
+
+to normal-spike
+  set size 3
+  setxy 16 -5
+  set color black
+  set shape "spike"
+end
+
+to mini-spike
+  normal-spike
+  set shape "mini spike"
+end
+
+to normal-slab
+  normal-spike
+  set shape "slab"
+end
+
+to block [version]
+  set shape-version version
+  normal-spike
+  set heading 0
+  ifelse length (version) > 0 [
+    set shape insert-item 6 "block " shape-version
+  ]
+  [set shape "block"]
+end
+
+to dust-phase [x]
+    set shape insert-item 4 "dust" x
+end
+
+to grid [version]
+  block ""
+  set shape-version version
+  ifelse length (version) > 0 [
+    set shape insert-item 5 "grid " shape-version
+  ]
+  [set shape "grid"]
+  set color 2
+  set ycor ycor - .25
+end
+
+to jump-pad
+  normal-spike
+  set shape "jump pad"
+  set color yellow
+  set size 3.3
+  set ycor ycor + .25
+end
+
+to orb
+  jump-pad
+  set shape "dot"
+end
+
+to portal [colour]
+  set shape "portal"
+  set color colour
+  set size 7
+  setxy 16 -3.5
+end
+
+to recenter
+  set heading round (heading / 90) * 90
+  ifelse gravity = 0 [
+    set ycor round ycor - .25
+  ]
+  [set ycor round ycor + .25]
+  set jump-x -10
+end
+
+to phone
+  ask patches [set pcolor gray]
+  cro 1 [
+    set color black
+    set shape "curvy"
+    set size 40
+  ]
+  cro 1 [
+    set color blue
+    set shape "curvy"
+    set size 37
+  ]
+end
+
+to addicted-to-gd
+  cro 1 [
+    set color blue - 2
+    set shape "curvy thin"
+    set size 25
+    set ycor 2.5
+  ]
+  cro 1 [
+    set shape "curvy extra thin"
+    set size 25
+    set ycor -3.5
+    set color lime
+  ]
+  cro 1 [
+    set shape "curvy extra thin"
+    set size 25
+    set ycor -6
+    set color cyan
+  ]
+  cro 1 [
+    set shape "demon"
+    set size 2
+    setxy -7 2
+  ]
+  cro 1 [
+    setxy 8 2
+    set label "GD-Addiction :("
+    set color blue - 2
+  ]
+
+end
+
+to swipe
+  cro 1 [
+    set shape "swipe left"
+    set heading -90
+    set color white
+    set xcor -12
+    set size 3
+  ]
+  cro 1 [
+    set shape "swipe right"
+    set heading 90
+    set color white
+    set xcor 12
+    set size 3
+  ]
+end
+
+to back-button
+  cro 1 [
+    set shape "back"
+    set color green
+    setxy -12 5.5
+    set size 3
+    lt 90
+  ]
+end
+
+to info
+  cro 1 [
+    set shape "info"
+    setxy 12 5.5
+    set size 1.5
+  ]
+end
+
+to top
+  cro 1 [
+    set shape "top"
+    set ycor 7.3
+    set size 12
+  ]
+end
+
+to lol
+  set xcor 2
+  set label "Hehe XD"
+end
+
+to fade-away
+  ask turtles [
+    if xcor < -13 [
+      set size size * .9
+    ]
+  ]
+end
+
+to fade-in
+  ask turtles with [fade-in? = 1] [
+    if xcor = 16 [
+      set size size / 10
+    ]
+    if xcor < 16 and xcor >= 13 [
+      set size size * 1.46779926762
+    ]
+  ]
+
+end
+
+to zoom-in [time]
+  while [time < 24][
+    ask turtles [
+      if abs xcor > 15.999 or abs ycor > 15.999 [die]
+      set size size * 1.0005
+      set time time + .001
+      set xcor xcor * 1.0005
+      set ycor ycor * 1.0005
+    ]
+    display
+    wait .001
+  ]
+end
+
+to level [input]
+  set letters input
+  ifelse counter <= length (letters) [
+    ask patch (-15 + length (letters)) 14 [set plabel substring (letters) 0 counter]
+  ]
+  [ifelse counter < length (letters) + 1 [
+    set counter counter + 1
+    ]
+    [
+    ask patch (-15 + length (letters)) 14 [set plabel ""]
+    set counter 1
+    ]
+  ]
+end
+
+to ground
+  setxy -10 -5.25
+  recenter
+end
+
+to background [input]
+  ask patches [
+    ifelse pycor > -7 [
+      set pcolor input - pycor / 5
+    ]
+    [
+      set pcolor input - 1
+    ]
+  ]
+end
+
+to-report in-range [l]
+	
+	let i 0
+	while [i < length l] [
+		let low item 0 (item i l)
+		let high item 1 (item i l)
+		if percentage > low and percentage < high [
+			report true
+		]
+    set i i + 1
+	]
+	report false
+end
+
+to update
+  if percentage > 35 and percentage < 35.55
+  [
+    level "update"
+    set counter counter + .25
+    ask turtle 0 [set shape "ball" set size 3]
+  ]
+end
