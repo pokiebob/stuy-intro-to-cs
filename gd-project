@@ -745,7 +745,7 @@ to go
         set size 3
       ]
     ]
-        
+
     if (percentage > 90.37 and percentage < 90.4)
     [
       create-objects 1 [
@@ -1121,7 +1121,7 @@ to go
       or (percentage > 101.08 and percentage < 101.38)
       or (percentage > 101.46 and percentage < 102.00)
       [
-        reg-jump 
+        reg-jump
       ]
       if (percentage >= 6.3 and percentage <= 6.97)
       [
@@ -1258,10 +1258,6 @@ to go
       ]
       ]
     ]
-    if percentage < 102 [
-      set percentage percentage + .025
-    ]
-    set blast 0
     ask patch 16 15 [
       if precision percentage 3 = round percentage [
         ifelse percentage < 50 [
@@ -1270,6 +1266,10 @@ to go
         [set plabel word (round percentage - 2) "%"]
       ]
     ]
+    if percentage < 102 [
+      set percentage percentage + .025
+    ]
+    set blast 0
     wait .025
   ]
   ask patches [set pcolor 1]
@@ -1310,6 +1310,12 @@ to go
     set label "Dedicado A: Tío Guitar"
     setxy 9 -8
     set color black
+  ]
+  cro 1 [
+    set shape "apple"
+    set color red
+    setxy 14 15
+    set size 2
   ]
 end
 
