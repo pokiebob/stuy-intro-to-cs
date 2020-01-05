@@ -1,5 +1,9 @@
-globals [my-cs-grade bad speed jump-x percentage counter letters gravity shape-version dust-value blast flip ball-x initial-y]
+globals [my-cs-grade bad maybe-a-little-better jump-x percentage counter letters gravity shape-version dust-value blast flip ball-x initial-y]
 turtles-own [important fade-in?]
+breed [leftspinzerz leftspinzer]
+breed [rightspinzerz rightspinzer]
+breed [wavys wavy]
+breed [waters water]
 breed [objects object]
 breed [particles particle]
 
@@ -11,29 +15,29 @@ to setup
   back-button
   info
   top
-  set speed 1
   set jump-x -10
   set percentage 0
   set counter 1
   set my-cs-grade 55
   set bad 55
+  set maybe-a-little-better 56
   set gravity 0
   set dust-value 0
 end
 
 to go
-;  ask turtle 6 [lol]
-;  zoom-in 0
+  ask turtle 6 [lol]
+  zoom-in 0
   ct
   background (105)
-;  wait 1
-;  repeat 27 [level "I May have skipped a level" wait .075 set counter counter + 1]
-;  wait 1
-;  repeat 6 [level "Or two" wait .1 set counter counter + 1]
-;  wait 1
-;  repeat 18 [level "Ok maybe more lmao" wait .05 set counter counter + 1]
   wait 1
-;  set counter 1
+  repeat 27 [level "I May have skipped a level" wait .075 set counter counter + 1]
+  wait 1
+  repeat 6 [level "Or two" wait .1 set counter counter + 1]
+  wait 1
+  repeat 18 [level "Ok maybe more lmao" wait .05 set counter counter + 1]
+  wait 1
+  set counter 1
   repeat 10 [level "Attempt 1" wait .1 set counter counter + 1]
   wait 1
   cro 1 [
@@ -182,7 +186,7 @@ to go
         set ycor 14
       ]
     ]
-    
+
     let dryout-tubes [
       [13.12 13.14]
       [13.24 13.26]
@@ -217,7 +221,7 @@ to go
       [17.37 17.39]
       [17.50 17.52]
     ]
-    
+
     if in-range dryout-tubes
     [
       create-objects 1 [
@@ -729,11 +733,331 @@ to go
         set ycor 12.4
       ]
       cro 1 [
-        portal lime
+        portal red
         set ycor 0
       ]
     ]
-
+    if (percentage > 89.30 and percentage < 89.33)
+    [
+      create-objects 1 [
+        set shape "dash orb"
+        set xcor 16
+        set size 3
+      ]
+    ]
+        
+    if (percentage > 90.37 and percentage < 90.4)
+    [
+      create-objects 1 [
+        set shape "fire"
+        set heading -90
+        set size 4
+      ]
+    ]
+    if (percentage > 92.93 and percentage < 92.96)
+    [
+      cro 1 [
+        portal green
+        set ycor 0
+      ]
+      deadtower 5 -15 "left"
+      deadtower 5 4.6 "left"
+    ]
+    if (percentage > 93.22 and percentage < 93.25)
+    [
+      deadtower 3 -15 "left"
+    ]
+    if (percentage > 93.34 and percentage < 93.37)
+    [
+      deadtower 3 -15 "right"
+    ]
+    if (percentage > 93.58 and percentage < 93.61)
+    [
+      create-rightspinzerz 1 [set shape "gear" set color 107 set size 7 setxy 16 -11.75]
+    ]
+    if (percentage > 93.82 and percentage < 93.85)
+    [
+      deadtower 4 -15 "right"
+    ]
+    if (percentage > 94.06 and percentage < 94.09)
+    [
+      create-rightspinzerz 1 [set shape "gear" set color 107 set size 5 setxy 16 -9.8]
+    ]
+    if (percentage > 94.30 and percentage < 94.32)
+    [
+      deadtower 5 -15 "left"
+    ]
+    if (percentage > 94.42 and percentage < 94.45)
+    [
+      deadtower 5 -15 "right"
+    ]
+    if (percentage > 94.78 and percentage < 94.81)
+    [
+      deadtower 3 -15 "left"
+      deadtower 4 8.2 "left"
+    ]
+    if (percentage > 94.90 and percentage < 94.92)
+    [
+      deadtower 3 -15 "middle"
+      deadtower 4 8.2 "middle"
+    ]
+    if (percentage > 95.02 and percentage < 95.05)
+    [
+      deadtower 3 -15 "middle 2"
+      deadtower 4 8.2 "middle 2"
+    ]
+    if (percentage > 95.08 and percentage < 95.11)
+    [
+      create-leftspinzerz 1 [set shape "gear" set color 107 set size 7 setxy 16 -8.5]
+    ]
+    if (percentage > 95.14 and percentage < 95.17)
+    [
+      deadtower 3 -15 "middle"
+      deadtower 4 8.2 "middle"
+    ]
+    if (percentage > 95.26 and percentage < 95.29)
+    [
+      deadtower 3 -15 "middle 2"
+      deadtower 4 8.2 "middle 2"
+    ]
+    if (percentage > 95.38 and percentage < 95.41)
+    [
+      deadtower 3 -15 "right"
+      deadtower 4 8.2 "right"
+    ]
+    if (percentage > 95.62 and percentage < 95.65)
+    [
+      create-rightspinzerz 1 [set shape "gear" set color 107 set size 7 setxy 16 13.4]
+    ]
+    if (percentage > 95.74 and percentage < 95.77)
+    [
+      create-rightspinzerz 1 [set shape "gear" set color 107 set size 5 setxy 16 7.85]
+    ]
+    if (percentage > 95.86 and percentage < 95.89)
+    [
+      deadtower 4 -15 "left"
+    ]
+    if (percentage > 95.98 and percentage < 96.01)
+    [
+      deadtower 4 6.9 "left"
+      cro 1 [
+        mini-spike
+        set ycor 4.3
+        rt 180
+      ]
+    ]
+    if (percentage > 96.10 and percentage < 96.12)
+    [
+      deadtower 4 6.9  "middle"
+      cro 1 [
+        mini-spike
+        set ycor 4.3
+        rt 180
+      ]
+    ]
+    if (percentage > 96.16 and percentage < 96.19)
+    [
+      deadtower 3 -15 "left"
+    ]
+    if (percentage > 96.22 and percentage < 96.24)
+    [
+      deadtower 4 6.9 "right"
+      cro 1 [
+        mini-spike
+        set ycor 4.3
+        rt 180
+      ]
+    ]
+    if (percentage > 96.46 and percentage < 96.49)
+    [
+      deadtower 5 -15 "left"
+      create-rightspinzerz 1 [set shape "gear" set color 107 set size 7 setxy 16 12.4]
+    ]
+    if (percentage > 96.58 and percentage < 96.61)
+    [
+      deadtower 5 -15 "right"
+    ]
+    if (percentage > 96.94 and percentage < 96.97)
+    [
+      create-rightspinzerz 1 [set shape "gear" set color 107 set size 7 setxy 16 -6.55]
+    ]
+    if (percentage > 97.30 and percentage < 97.32)
+    [
+      deadtower 3 -15 "left"
+    ]
+    if (percentage > 97.42 and percentage < 97.45)
+    [
+      deadtower 3 -15 "right"
+    ]
+    if (percentage > 97.78 and percentage < 97.81)
+    [
+      deadtower 5 -15 "left"
+      deadtower 3 9.8 "left"
+      cro 1 [
+        mini-spike
+        set ycor 7.2
+        rt 180
+      ]
+    ]
+    if (percentage > 97.90 and percentage < 97.92)
+    [
+      deadtower 3 9.8 "middle 2"
+      cro 1 [
+        mini-spike
+        set ycor 7.2
+        rt 180
+      ]
+    ]
+    if (percentage > 98.02 and percentage < 98.05)
+    [
+      deadtower 3 9.8 "right"
+      cro 1 [
+        mini-spike
+        set ycor 7.2
+        rt 180
+      ]
+    ]
+    if (percentage > 98.14 and percentage < 98.17)
+    [
+      deadtower 4 -15 "left"
+    ]
+    if (percentage > 98.60 and percentage < 98.62)
+    [
+      deadtower 6 -15 "left"
+      deadtower 2 13.4 "left"
+    ]
+    if (percentage > 98.72 and percentage < 98.75)
+    [
+      deadtower 6 -15 "middle"
+      deadtower 2 13.4 "middle"
+    ]
+    if (percentage > 98.84 and percentage < 98.87)
+    [
+      deadtower 6 -15 "middle 2"
+      deadtower 2 13.4 "middle 2"
+    ]
+    if (percentage > 98.90 and percentage < 98.92)
+    [
+      create-rightspinzerz 1 [set shape "gear" set color 107 set size 7 setxy 16 -0.8]
+    ]
+    if (percentage > 98.96 and percentage < 98.99)
+    [
+      deadtower 6 -15 "middle"
+      deadtower 2 13.4 "middle"
+    ]
+    if (percentage > 99.08 and percentage < 99.11)
+    [
+      deadtower 6 -15 "middle 2"
+      deadtower 2 13.4 "middle 2"
+    ]
+    if (percentage > 99.20 and percentage < 99.22)
+    [
+      deadtower 6 -15 "middle"
+      deadtower 2 13.4 "middle"
+    ]
+    if (percentage > 99.32 and percentage < 99.35)
+    [
+      deadtower 6 -15 "right"
+      deadtower 2 13.4 "right"
+    ]
+    if (percentage > 99.70 and percentage < 99.72)
+    [
+      deadtower 5 -15 "left"
+    ]
+    if (percentage > 100.00 and percentage < 100.02)
+    [
+      create-rightspinzerz 1 [set shape "gear" set color 107 set size 5 setxy 16 -3.95]
+    ]
+    if (percentage > 100.06 and percentage < 100.09)
+    [
+      deadtower 7 -15 "left"
+    ]
+    if (percentage > 100.18 and percentage < 100.21)
+    [
+      deadtower 7 -15 "middle"
+    ]
+    if (percentage > 100.31 and percentage < 100.33)
+    [
+      deadtower 7 -15 "right"
+      cro 1 [
+        normal-spike
+        set ycor 3.5
+      ]
+    ]
+    let wave-ranges1 [
+      [92.98 93.01]
+      [93.10 93.13]
+      [93.22 93.25]
+      [93.34 93.37]
+      [93.46 93.49]
+      [93.58 93.61]
+      [93.70 93.73]
+      [93.82 93.85]
+      [93.94 93.97]
+      [94.06 94.09]
+      [94.18 94.21]
+      [94.30 94.33]
+      [94.42 94.45]
+      [94.54 94.57]
+      [94.66 94.69]
+      [94.78 94.81]
+      [94.90 94.93]
+      [95.02 95.05]
+      [95.14 95.17]
+      [95.26 95.29]
+      [95.38 95.41]
+      [95.50 95.53]
+      [95.62 95.65]
+      [95.74 95.77]
+      [95.86 95.89]
+      [95.98 96.01]
+      [96.10 96.13]
+      [96.22 96.25]
+      [96.34 96.37]
+      [96.46 96.49]
+    ]
+    let wave-ranges2 [
+      [96.58 96.61]
+      [96.70 96.73]
+      [96.82 96.85]
+      [96.94 96.97]
+      [97.06 97.09]
+      [97.18 97.21]
+      [97.30 97.33]
+      [97.42 97.45]
+      [97.54 97.57]
+      [97.66 97.69]
+      [97.78 97.81]
+      [97.90 97.93]
+      [98.02 98.05]
+    ]
+    let wave-ranges3 [
+      [98.14 98.17]
+      [98.26 98.29]
+      [98.38 98.41]
+      [98.50 98.53]
+      [98.62 98.65]
+      [98.74 98.77]
+      [98.86 98.89]
+      [98.98 99.01]
+      [99.10 99.13]
+      [99.22 99.25]
+      [99.34 99.37]
+      [99.46 99.49]
+      [99.58 99.61]
+      [99.70 99.73]
+      [99.82 99.85]
+      [99.94 99.97]
+    ]
+    if in-range wave-ranges1 [
+      deadwave 1
+    ]
+    if in-range wave-ranges2 [
+      deadwave 2
+    ]
+    if in-range wave-ranges3 [
+      deadwave 3
+    ]
     ask turtle 0 [
       if (percentage > 6.97 and percentage <= 7)
       or (percentage > 14.7 and percentage < 14.72)
@@ -744,6 +1068,21 @@ to go
       or (percentage > 17.47 and percentage < 17.49)
       or (percentage > 17.96 and percentage < 17.98)
       or (percentage > 18.45 and percentage < 18.47)
+      or (percentage > 94.54 and percentage < 94.64)
+      or (percentage > 95.07 and percentage < 95.10)
+      or (percentage > 95.53 and percentage < 95.61)
+      or (percentage > 96.08 and percentage < 96.13)
+      or (percentage > 96.64 and percentage < 96.67)
+      or (percentage > 97.06 and percentage < 97.09)
+      or (percentage > 97.36 and percentage < 97.39)
+      or (percentage > 97.75 and percentage < 97.78)
+      or (percentage > 98.54 and percentage < 98.57)
+      or (percentage > 98.98 and percentage < 99.01)
+      or (percentage > 99.32 and percentage < 99.35)
+      or (percentage > 99.68 and percentage < 99.71)
+      or (percentage > 100.42 and percentage < 100.51)
+      or (percentage > 100.90 and percentage < 100.95)
+      or (percentage > 101.38 and percentage < 101.41)
       [
         recenter
       ]
@@ -765,8 +1104,24 @@ to go
       or (percentage > 17.51 and percentage < 17.94)
       or (percentage > 18.00 and percentage < 18.43)
       or (percentage > 18.49 and percentage < 18.91)
+      or (percentage > 94.26 and percentage < 94.50)
+      or (percentage > 94.62 and percentage < 95.07)
+      or (percentage > 95.10 and percentage < 95.58)
+      or (percentage > 95.80 and percentage < 96.10)
+      or (percentage > 96.16 and percentage < 96.64)
+      or (percentage > 96.70 and percentage < 97.06)
+      or (percentage > 97.18 and percentage < 97.36)
+      or (percentage > 97.42 and percentage < 97.75)
+      or (percentage > 98.02 and percentage < 98.54)
+      or (percentage > 98.68 and percentage < 98.98)
+      or (percentage > 99.16 and percentage < 99.32)
+      or (percentage > 99.40 and percentage < 99.70)
+      or (percentage > 99.94 and percentage < 100.42)
+      or (percentage > 100.72 and percentage < 100.90)
+      or (percentage > 101.08 and percentage < 101.38)
+      or (percentage > 101.46 and percentage < 102.00)
       [
-        reg-jump
+        reg-jump 
       ]
       if (percentage >= 6.3 and percentage <= 6.97)
       [
@@ -785,10 +1140,15 @@ to go
         recenter
         set jump-x -11
       ]
-      if (percentage > 11.2 and percentage < 11.22)
+      if (percentage > 11.20 and percentage < 11.22)
       or (percentage > 15.85 and percentage < 15.87)
       or (percentage > 16.37 and percentage < 16.45)
       or (percentage > 16.50 and percentage < 16.52)
+      or (percentage > 94.00 and percentage < 94.03)
+      or (percentage > 95.80 and percentage < 95.83)
+      or (percentage > 97.09 and percentage < 97.12)
+      or (percentage > 99.01 and percentage < 99.04)
+      or (percentage > 100.51 and percentage < 100.54)
       [
         set jump-x 0
       ]
@@ -822,17 +1182,49 @@ to go
       [
         fly
       ]
-      if (percentage > 35 and percentage < 38)
+      if (percentage > 32.8 and percentage < 32.83) [set gravity 1]
+      if (percentage > 32.83 and percentage < 35)
+      or (percentage > 37 and percentage < 39)
+      or (percentage > 40 and percentage < 41)
       [
         set flip 1
       ]
       update
-      if (percentage > 35 and percentage < 40)
+      if (percentage > 32.8 and percentage < 80)
       [
+        set shape "ball" set size 3
         ball
       ]
+      if (percentage > 83 and percentage < 83.03)
+      or (percentage > 84 and percentage < 84.03)
+      or (percentage > 84.5 and percentage < 85)
+      or (percentage > 85.2 and percentage < 85.23)
+      or (percentage > 86 and percentage < 86.6)
+      or (percentage > 87 and percentage < 87.03)
+      or (percentage > 87.35 and percentage < 90)
+      [
+        set flip 1
+      ]
+      if (percentage > 80 and percentage < 90.37)
+      [
+        wave
+        set flip 0
+      ]
+      if (percentage > 90.37 and percentage < 94.23)
+      [
+         dash
+         set ycor 0
+      ]
     ]
-    if (percentage > 14.25 and percentage < 35)
+    if (percentage > 94.23 and percentage < 94.26)
+    [
+      ask turtles with [shape = "fire"][die]
+      ask turtle 0 [set shape "icon" set size 5]
+      ask patches [set pcolor 114 - pycor / 5]
+      ask patches with [pycor = -16] [set pcolor 0]
+      set gravity 0
+    ]
+    if percentage > 14.25
     [
       ask turtles with [xcor = 16] [
         set fade-in? 1
@@ -841,20 +1233,83 @@ to go
       fade-away
     ]
     ask turtle 1 [
-      set ycor [ycor] of turtle 0
-      ifelse object? or ground? or ceiling? or blast = 1 [
+      setxy [xcor] of turtle 0 [ycor] of turtle 0
+      ifelse (ground? and percentage < 50) or object? or ceiling? or blast = 1 [
         show-turtle
       ]
       [hide-turtle]
     ]
-    ask turtles with [important = 0] [
-      set xcor xcor - .5 * speed
-      if xcor = -16 [die]
+    spin:P
+    ifelse percentage < 101.4 [
+      ask turtles with [important = 0] [
+        set xcor xcor - .5
+        if xcor = -16 [die]
+      ]
+    ]
+    [ask turtle 0 [
+      set xcor xcor + .5
+      if percentage >= 102 [
+        rt 18
+        set label "GG"
+        if xcor > 15.5 [
+          set my-cs-grade maybe-a-little-better
+          die
+        ]
+      ]
+      ]
+    ]
+    if percentage < 102 [
+      set percentage percentage + .025
     ]
     set blast 0
-    set percentage percentage + .025 / speed
-    wait .025 / speed
-    if percentage > 38.00 [stop]
+    ask patch 16 15 [
+      if precision percentage 3 = round percentage [
+        ifelse percentage < 50 [
+          set plabel word (round percentage) "%"
+        ]
+        [set plabel word (round percentage - 2) "%"]
+      ]
+    ]
+    wait .025
+  ]
+  ask patches [set pcolor 1]
+  cro 1 [
+    set color 1
+    set label "LEVEL COMPLETE!"
+    repeat 30 [
+      setxy random-xcor random-ycor
+      wait .1
+    ]
+  ]
+  ca
+  cro 1 [
+    set shape "gg"
+    set size 32
+  ]
+  cro 1 [
+    set label "Attempts: Too Many"
+    setxy 8 8
+    set color black
+  ]
+  cro 1 [
+    set label "Jumps: Too Few"
+    setxy 6 4
+    set color black
+  ]
+  cro 1 [
+    set label "Time: Too Little"
+    setxy 5.75 0
+    set color black
+  ]
+  cro 1 [
+    set label "My CS Grade: Bad"
+    setxy 7 -4
+    set color black
+  ]
+  cro 1 [
+    set label "Dedicado A: Tío Guitar"
+    setxy 9 -8
+    set color black
   ]
 end
 
@@ -864,7 +1319,7 @@ to reg-jump
   ifelse jump-x < 0 [
     set ycor ycor + velocity (0)/ 50
   ]
-  [ifelse ground? or object? [
+  [ifelse object? or (ground? and percentage < 94) [
     recenter
     ]
     [
@@ -932,20 +1387,22 @@ to fly
 end
 
 to ball
-  set ball-x ball-x + 1
   if flip = 1 [
     if ball-x = 0 [
       set initial-y ycor
       ifelse gravity = 0 [set gravity 1 set ycor ycor + .5] [set gravity 0 set ycor ycor - .5]
     ]
+    set ball-x ball-x + 1
     ifelse gravity = 1 [
-      ifelse count objects-at xcor ycor + 1 < 2 and ycor < 15 and ycor > -15 [
-        ifelse ball-x < 10 [set ycor ycor + .2 * (ycor - initial-y) ^ 2] [set ycor ycor + .6]
+      ifelse count objects-at xcor ycor + 1 < 2 and ycor < 15
+      [
+        ifelse ball-x < 10 [set ycor ycor + .2 * (ycor - initial-y) ^ 2] [set ycor ycor + .8]
       ]
       [set ball-x 0 set flip 0]
     ]
-    [ifelse count objects-at xcor ycor - 1 < 2 and ycor < 15 and ycor > -15 [
-      ifelse ball-x < 10 [set ycor ycor - .2 * (ycor - initial-y) ^ 2] [set ycor ycor - .6]
+    [ifelse count objects-at xcor ycor - 1 < 2 and ycor > -15
+      [
+      ifelse ball-x < 10 [set ycor ycor - .2 * (ycor - initial-y) ^ 2] [set ycor ycor - .8]
       ]
       [set ball-x 0 set flip 0]
     ]
@@ -955,6 +1412,36 @@ to ball
   ]
   [lt 9]
 end
+
+to wave
+  set size 4
+  set shape "wave"
+  if flip = 1 [
+    ifelse gravity = 0
+    [set gravity 1 set ycor ycor + .5 set heading -45]
+    [set gravity 0 set ycor ycor - .5 set heading 45]
+  ]
+  ifelse ycor < 15.5 and ycor > -15.5 [
+    ifelse gravity = 0 [
+      set ycor ycor - .5
+      set heading 45
+    ]
+    [set ycor ycor + .5
+      set heading -45
+    ]
+  ]
+  [set heading 0]
+end
+
+to dash
+  rt 18
+  set heading 0
+  ask turtles with [shape = "fire"]
+  [
+    setxy [xcor] of turtle 0 - .5 [ycor] of turtle 0
+  ]
+end
+
 to-report ground?
   ifelse ycor <= -4 [report true] [report false]
 end
@@ -1039,6 +1526,44 @@ to portal [colour]
   set color colour
   set size 7
   setxy 16 -3.5
+end
+
+to deadtower [height y direction]
+  repeat height [
+    create-objects 1 [
+      set size 3
+      set color 2
+      setxy 16 y
+      set shape insert-item 5 "dead " direction
+      set y y + 2.6
+    ]
+  ]
+end
+
+to deadwave [height]
+  let y -15
+  repeat height [
+    create-waters 1 [
+      set shape "green"
+      set size 3
+      setxy 16 y
+      set y y + 2.6
+    ]
+  ]
+  create-wavys 1 [
+    set shape "wavy"
+    set size 3
+    setxy 16 y
+  ]
+end
+
+to spin:P
+  ask leftspinzerz [
+    lt 4
+  ]
+  ask rightspinzerz [
+    rt 4
+  ]
 end
 
 to recenter
@@ -1223,10 +1748,69 @@ to-report in-range [l]
 end
 
 to update
-  if percentage > 35 and percentage < 35.55
+  if (percentage > 33 and percentage < 33.25)
+  or (percentage > 33.3 and percentage < 33.55)
+  or (percentage > 33.6 and percentage < 33.85)
   [
-    level "update"
+    level "..."
     set counter counter + .25
-    ask turtle 0 [set shape "ball" set size 3]
+  ]
+  if (percentage > 34 and percentage < 34.85)
+  [
+    level "UPDATE..."
+    set counter counter + .25
+  ]
+  if (percentage > 35 and percentage < 35.75)
+  [
+    level "Mr. Broo"
+    set counter counter + .25
+  ]
+  if (percentage > 35.8 and percentage < 35.9)
+  [
+    set counter 8
+  ]
+  if (percentage > 35.9 and percentage < 36.65)
+  [
+    level "Mr. Broo"
+    set counter counter - .25
+  ]
+  if (percentage > 36.7 and percentage < 38.825)
+  [
+    level "GOD posted a due date"
+    set counter counter + .25
+  ]
+  if (percentage > 39 and percentage < 40.65)
+  [
+    level "This calls for an"
+    set counter counter + .25
+  ]
+  if (percentage > 40.8 and percentage < 41.325)
+  [
+    level "inconspicious % jump"
+    set counter counter + 1
+  ]
+  if (percentage > 41.35 and percentage < 41.38)
+  [
+    set percentage percentage + 40
+  ]
+  if (percentage > 81.6 and percentage < 82.175)
+  [
+    level "hehe..."
+    set counter counter + .25
+  ]
+  if (percentage > 83 and percentage < 85.55)
+  [
+    level "For my die hard GD fans..."
+    set counter counter + .25
+  ]
+  if (percentage > 86 and percentage < 88.575)
+  [
+    level "Will 2.2 be Revolution...?"
+    set counter counter + .25
+  ]
+  if (percentage > 90 and percentage < 92.55)
+  [
+    level "Ok it's Deadlocked time..."
+    set counter counter + .25
   ]
 end
