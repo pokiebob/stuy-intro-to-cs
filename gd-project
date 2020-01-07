@@ -31,14 +31,14 @@ to go
   ct
   background (105)
   wait 1
-  repeat 27 [level "I May have skipped a level" wait .075 set counter counter + 1]
+  repeat 32 [level "I May have skipped a level" wait .075 set counter counter + 1]
   wait 1
-  repeat 6 [level "Or two" wait .1 set counter counter + 1]
+  repeat 11 [level "Or two" wait .1 set counter counter + 1]
   wait 1
-  repeat 18 [level "Ok maybe more lmao" wait .05 set counter counter + 1]
+  repeat 23 [level "Ok maybe more lmao" wait .05 set counter counter + 1]
   wait 1
   set counter 1
-  repeat 10 [level "Attempt 1" wait .1 set counter counter + 1]
+  repeat 15 [level "Attempt 1" wait .1 set counter counter + 1]
   wait 1
   cro 1 [
     set important 1
@@ -79,7 +79,7 @@ to go
         normal-spike
       ]
     ]
-    if percentage >= 0 and percentage <= 1.25 [
+    if percentage >= 0 and percentage < 1.44 [
       level "Stereo Madness"
       set counter counter + .25
     ]
@@ -100,7 +100,7 @@ to go
       ]
       background 125
     ]
-    if percentage > 5 and percentage <= 6.25 [
+    if percentage > 5 and percentage < 6.42 [
       level "Back On Track"
       set counter counter + .25
     ]
@@ -134,7 +134,7 @@ to go
         set ycor ycor + 5.75
       ]
     ]
-    if (percentage >= 8 and percentage <= 8.95) [
+    if (percentage >= 8 and percentage < 9.11) [
       level "Polargeist"
       set counter counter + .25
     ]
@@ -155,7 +155,7 @@ to go
         set ycor ycor + 4
       ]
     ]
-    if (percentage >= 12 and percentage <= 12.65) [
+    if (percentage >= 12 and percentage < 12.82) [
       background 3.2
       level "Dry Out"
       set counter counter + .25
@@ -320,7 +320,7 @@ to go
     [
       ask patches [set pcolor 124 - pycor / 5]
     ]
-    if (percentage > 19 and percentage < 20.45) [
+    if (percentage > 19 and percentage < 20.63) [
       level "Base After Base"
       set counter counter + .25
     ]
@@ -505,7 +505,7 @@ to go
         ]
       ]
     ]
-    if (percentage > 26.00 and percentage < 27.15)
+    if (percentage > 26.00 and percentage < 27.33)
     [
       ask patches [set pcolor black]
       level "Can't Let Go"
@@ -737,7 +737,7 @@ to go
         set ycor 0
       ]
     ]
-    if (percentage > 89.30 and percentage < 89.33)
+    if (percentage > 89.30 and percentage < 89.32)
     [
       create-objects 1 [
         set shape "dash orb"
@@ -1234,7 +1234,7 @@ to go
     ]
     ask turtle 1 [
       setxy [xcor] of turtle 0 [ycor] of turtle 0
-      ifelse (ground? and percentage < 50) or object? or ceiling? or blast = 1 [
+      ifelse (ground? and percentage < 33) or object? or ceiling? or blast = 1 [
         show-turtle
       ]
       [hide-turtle]
@@ -1717,9 +1717,14 @@ to level [input]
   [ifelse counter < length (letters) + 1 [
     set counter counter + 1
     ]
+    [ifelse counter < length (letters) + 10 [
+      ask patch (-15 + length (letters)) 14 [set plabel letters]
+      set counter counter + 1
+      ]
     [
     ask patch (-15 + length (letters)) 14 [set plabel ""]
     set counter 1
+      ]
     ]
   ]
 end
@@ -1754,67 +1759,67 @@ to-report in-range [l]
 end
 
 to update
-  if (percentage > 33 and percentage < 33.25)
-  or (percentage > 33.3 and percentage < 33.55)
-  or (percentage > 33.6 and percentage < 33.85)
+  if (percentage > 33.00 and percentage < 33.43)
+  or (percentage > 33.45 and percentage < 33.88)
+  or (percentage > 33.90 and percentage < 34.33)
   [
     level "..."
     set counter counter + .25
   ]
-  if (percentage > 34 and percentage < 34.85)
+  if (percentage > 34.45 and percentage < 35.48)
   [
     level "UPDATE..."
     set counter counter + .25
   ]
-  if (percentage > 35 and percentage < 35.75)
+  if (percentage > 35.60 and percentage < 36.38)
   [
     level "Mr. Broo"
     set counter counter + .25
   ]
-  if (percentage > 35.8 and percentage < 35.9)
+  if (percentage > 36.38 and percentage < 36.41)
   [
     set counter 8
   ]
-  if (percentage > 35.9 and percentage < 36.65)
+  if (percentage > 36.45 and percentage < 37.23)
   [
     level "Mr. Broo"
     set counter counter - .25
   ]
-  if (percentage > 36.7 and percentage < 38.825)
+  if (percentage > 37.3 and percentage < 39.63)
   [
     level "GOD posted a due date"
     set counter counter + .25
   ]
-  if (percentage > 39 and percentage < 40.65)
+  if (percentage > 39.65 and percentage < 41.48)
   [
     level "This calls for an"
     set counter counter + .25
   ]
-  if (percentage > 40.8 and percentage < 41.325)
+  if (percentage > 41.7 and percentage < 42.33)
   [
     level "inconspicious % jump"
     set counter counter + 1
   ]
-  if (percentage > 41.35 and percentage < 41.38)
+  if (percentage > 42.35 and percentage < 42.38)
   [
-    set percentage percentage + 40
+    set percentage percentage + 39
   ]
-  if (percentage > 81.6 and percentage < 82.175)
+  if (percentage > 81.6 and percentage < 82.36)
   [
     level "hehe..."
     set counter counter + .25
   ]
-  if (percentage > 83 and percentage < 85.55)
+  if (percentage > 83 and percentage < 85.73)
   [
     level "For my die hard GD fans..."
     set counter counter + .25
   ]
-  if (percentage > 86 and percentage < 88.575)
+  if (percentage > 87 and percentage < 89.73)
   [
     level "Will 2.2 be Revolution...?"
     set counter counter + .25
   ]
-  if (percentage > 90 and percentage < 92.55)
+  if (percentage > 90 and percentage < 92.71)
   [
     level "Ok it's Deadlocked time..."
     set counter counter + .25
