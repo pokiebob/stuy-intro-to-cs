@@ -1,0 +1,364 @@
+globals
+[
+  chealth phealth
+  p-jump? pright? pleft?
+  plaser? claser?
+  phurt? churt?
+  pprotec? cprotec?
+  plaser-length claser-length
+  jump-x
+  pbobble-direction cbobble-direction
+  pbobble-counter cbobble-counter
+  phurt-counter churt-counter
+  pshield-counter cshield-counter
+]
+breed [shields shield]
+breed [plines pline]
+breed [clines cline]
+breed [players player]
+breed [computers computer]
+breed [ears ear]
+breed [lasers laser]
+
+to setup
+  ca
+  set jump-x -11
+  set pbobble-counter 5 set cbobble-counter 5
+  set phealth 10 set chealth 10
+  ask patches [set pcolor white]
+  cro 1 [
+    set breed players
+    set shape "owo005"
+    set color black
+    set size 6
+    setxy -10 -5
+  ]
+  cro 1 [
+    set breed computers
+    set shape "owo015"
+    set color black
+    set size 6
+    setxy 10 -5
+  ]
+  cro 1 [
+    set breed ears
+    set shape "ears00"
+    set size 6
+    setxy -9.5 -2.5
+    hide-turtle
+  ]
+  cro 1 [
+    set breed ears
+    set shape "ears10"
+    set size 6
+    setxy 9.5 -2.5
+    hide-turtle
+  ]
+  cro 1 [
+    set breed shields
+    set shape "circle"
+    set size 0
+    setxy -10 -5
+    hide-turtle
+  ]
+  cro 1 [
+    set breed shields
+    set shape "circle"
+    set size 0
+    setxy 10 -5
+    hide-turtle
+  ]
+end
+
+to go
+  ask player 0 [
+    if pright? = 1 [
+      move-right
+    ]
+    if pleft? = 1 [
+      move-left
+    ]
+    ifelse plaser? = 1 [
+      if color = 0 [set color 5]
+      set color color + 10
+    ]
+    [set color black]
+    if phurt? = 1 [
+      phurt
+    ]
+    if xcor > [xcor] of computer 1 - 3 [
+      set xcor [xcor] of computer 1 - 3
+    ]
+    if xcor < -13 [
+      set xcor -13
+    ]
+    jump-up
+    pbobble
+  ]
+  ask computer 1 [
+    ifelse claser? = 1 [
+      if color = 0 [set color 5]
+      set color color + 10
+    ]
+    [set color black]
+    if churt? = 1 [
+      churt
+    ]
+    if xcor > 13 [
+      set xcor 13
+    ]
+    cbobble
+  ]
+  if pprotec? = 1 [
+    pprotec
+  ]
+  if cprotec? = 1 [
+    cprotec
+  ]
+  if plaser? = 1
+  [plaser-beam]
+  if claser? = 1
+  [claser-beam]
+  if plaser? = 0 and claser? = 0
+  [ask lasers [die]]
+  wait .025
+end
+
+to pprotec
+  ask ear 2 [
+    show-turtle
+    set xcor [xcor] of player 0
+    if pshield-counter > 4 and pshield-counter <= 12 [
+      set shape insert-item 5 "ears0" word "" (round pshield-counter - 4)
+    ]
+    if pshield-counter < 40 and pshield-counter > 32 [
+      ask ears [
+        set shape insert-item 5 "ears0" word "" (round (40 - pshield-counter))
+      ]
+    ]
+  ]
+  ask player 0 [
+    set shape "owo005"
+  ]
+  ask shield 4 [
+    show-turtle
+    setxy [xcor] of player 0 [ycor] of player 0
+    set color 99 - pshield-counter / 4
+    if pshield-counter <= 10  [set size size + .25]
+  ]
+  if pshield-counter < 8 and (round (pshield-counter * 4) = pshield-counter * 4)  [
+    cro 1 [
+      set breed plines
+      set shape "shield-lines"
+      setxy [xcor] of player 0 [ycor] of player 0
+      rt (45 + 4) * pshield-counter * 4
+    ]
+  ]
+  ask plines [
+    setxy [xcor] of player 0 [ycor] of player 0
+    if pshield-counter <= 10  [set size pshield-counter]
+    rt 1
+  ]
+  if pshield-counter > 32 [
+    ask shield 4 [set size size - .5]
+    ask plines [set size size - .5]
+  ]
+  set pshield-counter pshield-counter + .25
+  if pshield-counter > 42 [
+    ask shield 4 [hide-turtle set size 0]
+    ask ear 2 [hide-turtle]
+    ask plines [die]
+    set pshield-counter 0
+    set pprotec? 0
+  ]
+end
+
+to cprotec
+  ask ear 3 [
+    show-turtle
+    set xcor [xcor] of computer 1
+    if cshield-counter > 4 and cshield-counter <= 12 [
+      set shape insert-item 5 "ears1" word "" (round cshield-counter - 4)
+    ]
+    if cshield-counter < 40 and cshield-counter > 32 [
+      ask ears [
+        set shape insert-item 5 "ears1" word "" (round (40 - cshield-counter))
+      ]
+    ]
+  ]
+  ask computer 1 [
+    set shape "owo015"
+  ]
+  ask shield 5 [
+    show-turtle
+    setxy [xcor] of computer 1 [ycor] of computer 1
+    set color 99 - cshield-counter / 4
+    if cshield-counter <= 10 [set size size + .25]
+  ]
+  if cshield-counter < 8 and (round (cshield-counter * 4) = cshield-counter * 4)  [
+    cro 1 [
+      set breed clines
+      set shape "shield-lines"
+      setxy [xcor] of computer 1 [ycor] of computer 1
+      rt (45 + 4) * cshield-counter * 4
+    ]
+  ]
+  ask clines [
+    setxy [xcor] of computer 1 [ycor] of computer 1
+    if cshield-counter <= 10 [set size cshield-counter]
+    rt 1
+  ]
+  if cshield-counter > 32 [
+    ask shield 5 [set size size - .5]
+    ask clines [set size size - .5]
+  ]
+  set cshield-counter cshield-counter + .25
+  if cshield-counter > 42 [
+    ask shield 5 [hide-turtle set size 0]
+    ask ear 3 [hide-turtle]
+    ask clines [die]
+    set cshield-counter 0
+    set cprotec? 0
+  ]
+end
+
+to phurt
+  set xcor xcor - .4
+  set color 15 + phealth / 2
+  set shape "owo008"
+  set heading -45
+  set phurt-counter phurt-counter + 1
+  if phurt-counter >= 10 [
+    set phurt-counter 0
+    set phurt? 0
+    set heading 0
+  ]
+end
+
+to churt
+  set xcor xcor + .4
+  set color 15 + chealth / 2
+  set shape "owo018"
+  set heading 45
+  set churt-counter churt-counter + 1
+  if churt-counter >= 10 [
+    set churt-counter 0
+    set churt? 0
+    set heading 0
+  ]
+end
+
+to plaser-beam
+  if pbobble-counter <= 1 [
+    create-lasers 1 [
+      set size 2
+      set breed lasers
+      set shape "laser"
+      set xcor [xcor] of player 0 + plaser-length
+      set ycor -3.5
+      set plaser-length plaser-length + 1
+      if xcor > [xcor] of computer 1 - 5 and cshield-counter > 4 and cshield-counter < 36 [
+        wait .5
+        set plaser? 0
+        set plaser-length 0
+      ]
+      if xcor > [xcor] of computer 1 - 3 [
+        wait .5
+        set plaser? 0
+        set plaser-length 0
+        set chealth chealth - 3
+        set churt? 1
+      ]
+    ]
+  ]
+end
+
+to claser-beam
+  if cbobble-counter <= 1 [
+    create-lasers 1 [
+      set size 2
+      set breed lasers
+      set shape "laser"
+      set xcor [xcor] of computer 1 - claser-length
+      set ycor -3.5
+      set claser-length claser-length + 1
+      if xcor < [xcor] of player 0 + 5 and pshield-counter > 4 and pshield-counter < 36 [
+        wait .5
+        set claser? 0
+        set claser-length 0
+      ]
+      if xcor < [xcor] of player 0 + 3 [
+        wait .5
+        set claser? 0
+        set claser-length 0
+        set phealth phealth - 3
+        set phurt? 1
+      ]
+    ]
+  ]
+end
+
+to pbobble
+  if round pbobble-counter = pbobble-counter
+  [set shape replace-item 5 shape word "" pbobble-counter]
+  if pbobble-direction = 0 [
+    set pbobble-counter pbobble-counter + .5
+    if pbobble-counter = 9 [set pbobble-direction 1]
+  ]
+  if pbobble-direction = 1 [
+    set pbobble-counter pbobble-counter - .5
+    if pbobble-counter <= 1
+    [ifelse plaser? = 0
+      [set pbobble-direction 0]
+      [set pbobble-counter 1 set shape "owo000"]
+    ]
+  ]
+end
+
+to cbobble
+  if round cbobble-counter = cbobble-counter
+  [set shape replace-item 5 shape word "" cbobble-counter]
+  if cbobble-direction = 0 [
+    set cbobble-counter cbobble-counter + .5
+    if cbobble-counter = 9 [set cbobble-direction 1]
+  ]
+  if cbobble-direction = 1 [
+    set cbobble-counter cbobble-counter - .5
+    if cbobble-counter <= 1
+    [ifelse claser? = 0
+      [set cbobble-direction 0]
+      [set cbobble-counter 1 set shape "owo010"]
+    ]
+  ]
+end
+
+to jump-up
+  if jump-x >= -10 [
+    ifelse jump-x < 0
+    [set ycor ycor + .025 * jump-x ^ 2 set jump-x jump-x + 1]
+    [set ycor ycor - .025 * jump-x ^ 2 set jump-x jump-x + 1]
+  ]
+  if jump-x > 10 [set jump-x -11]
+end
+
+to move-right
+  set xcor xcor + .4
+  set shape replace-item 4 shape "0"
+  if round pbobble-counter = pbobble-counter [
+    ifelse (item 3 shape) = "1"
+    [set shape replace-item 3 shape "0"]
+    [set shape replace-item 3 shape "1"]
+  ]
+  set pright? 0
+end
+
+to move-left
+  set xcor xcor - .4
+  set shape replace-item 4 shape "1"
+  if round pbobble-counter = pbobble-counter [
+    ifelse (item 3 shape) = "1"
+    [set shape replace-item 3 shape "0"]
+    [set shape replace-item 3 shape "1"]
+  ]
+  set pleft? 0
+end
