@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href='https://fonts.googleapis.com/css?family=Akronim' rel='stylesheet'>
+<style>
+body, html {
+	background-color: black;
+	background-size: cover;
+}
+
+h1 {
+	color: white;
+	font-size: 100px;
+	margin:0;
+	padding:0;
+}
+h6 {
+	color: red;
+	font-size: 45px;
+	margin:0;
+	padding:0;
+}
+.akronim {
+    font-family: 'Akronim';
+}
+.bgimage {
+	display: block;
+	width: 100%;
+	height: auto;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.overlay {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: 2s ease;
+	background-color: black;
+}
+
+.container:hover .overlay {
+	opacity: 1;
+}
+
+.text {
+	position: fixed;
+	margin: 0;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+
+</style>
+<title>SURVIVE: Incoming Stuy Freshman</title>
+<link rel="icon" href="stuylogo.jpg" type="image/jpg">
+
+</head>
+
+<body>
+<div class="container">
+	<img src="stuybuilding.jpg" alt="Building" class="bgimage">
+<div class="overlay akronim text">
+	<h1>S U R V I V E</h1>
+	<h6>As an Incoming Stuy Freshman</h6>
+</div>
+</div>
+
+</body>
+</html>
