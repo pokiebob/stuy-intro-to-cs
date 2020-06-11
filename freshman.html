@@ -5,7 +5,6 @@
 <style>
 body, html {
 	background-color: black;
-	background-size: cover;
 }
 
 h1 {
@@ -19,6 +18,10 @@ h6 {
 	font-size: 45px;
 	margin:0;
 	padding:0;
+}
+.regtext {
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
 }
 .akronim {
     font-family: 'Akronim';
@@ -71,9 +74,16 @@ h6 {
 <body>
 <div class="container">
 	<img src="stuybuilding.jpg" alt="Building" class="bgimage">
-<div class="overlay akronim text">
-	<h1>S U R V I V E</h1>
-	<h6>As an Incoming Stuy Freshman</h6>
+<div class="overlay text">
+	<div class="akronim">
+		<h1>S U R V I V E</h1>
+		<h6>As an Incoming Stuy Freshman</h6>
+	</div>
+	<form method="get" action="freshman.py">
+		<br><br><br><br><br>
+		<input name="play" type="submit" value="PLAY" />
+	</form>
+
 </div>
 </div>
 
