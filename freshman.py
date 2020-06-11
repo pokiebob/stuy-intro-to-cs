@@ -12,15 +12,18 @@ if 'HTTP_COOKIE' in os.environ.keys():
 	cookies = cookie_set.split(';')
 	for acookie in cookies:
 		if "level" in acookie:
-			level = float(acookie.strip()[-1])
+			level = int(acookie.strip()[-1])
+		else:
+			level = 1
+			print('Set-Cookie: level=1')
 
 else:
 	level = 1
-	print('Set Cookie: level=1')
+	print('Set-Cookie: level=1')
 
 if form.getvalue("level") == "NEXT PHASE":
 	level += 1
-	print('Set Cookie: level={}'.format(level))
+	print('Set-Cookie: level={}'.format(level))
 
 l1='''
 <!DOCTYPE html>
