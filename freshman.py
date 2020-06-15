@@ -25,7 +25,13 @@ if form.getvalue("level") == "NEXT PHASE":
   level += 1
   print('Set-Cookie: level={}'.format(level))
 
+if form.getvalue("level") == "LEVEL 1":
+  level = 1
+  print('Set-Cookie: level=1')
 
+if form.getvalue("level") == "LEVEL 2":
+  level = 2
+  print('Set-Cookie: level=2')
 
 l1='''
 <!DOCTYPE html>
@@ -51,7 +57,14 @@ p {
 form {
   text-align: center;
 }
-
+input {
+  background-color: black;
+  color: white;
+  border: 2px solid red;
+  border-radius: 4px
+  width: 40em;
+  height: 3em;
+}
 .fade-in {
   animation: fadeIn ease 2s;
   -webkit-animation: fadeIn ease 2s;
@@ -112,7 +125,7 @@ form {
 <body>
 
 <div class="fade-in">
-  <h1> PHASE 1: Homeroom </h1>
+  <h1> PHASE 1: Get to Homeroom </h1>
 </div>
 
 
@@ -135,10 +148,22 @@ h1 {
   font-family: 'Akronim';
   text-align: center;
 }
-h2 {
+p {
   color: white;
+  font-size: 20px;
+  text-align: center;
 }
-
+form {
+  text-align: center;
+}
+input {
+  background-color: black;
+  color: white;
+  border: 2px solid red;
+  border-radius: 4px
+  width: 40em;
+  height: 3em;
+}
 .fade-in {
   animation: fadeIn ease 2s;
   -webkit-animation: fadeIn ease 2s;
@@ -199,13 +224,7 @@ h2 {
 <body>
 
 <div class="fade-in">
-  <h1> PHASE 2: Lunch </h1>
-  <form method="get" action="freshman.py">
-    <br><br><br><br><br>
-    <center>
-    <input name="level" type="submit" value="NEXT PHASE" />
-    </center>
-  </form>
+  <h1> PHASE 2: Get to Class </h1>
 </div>
 
 
@@ -229,10 +248,22 @@ h1 {
   font-family: 'Akronim';
   text-align: center;
 }
-h2 {
+p {
   color: white;
+  font-size: 20px;
+  text-align: center;
 }
-
+form {
+  text-align: center;
+}
+input {
+  background-color: black;
+  color: white;
+  border: 2px solid red;
+  border-radius: 4px
+  width: 40em;
+  height: 3em;
+}
 .fade-in {
   animation: fadeIn ease 2s;
   -webkit-animation: fadeIn ease 2s;
@@ -294,6 +325,18 @@ h2 {
 
 <div class="fade-in">
   <h1> YOU SURVIVED </h1>
+  <form method="get" action="freshman.py">
+    <p> We wanted to do a "Don't Procrastinate" phase, but decided against it because we are not sufficiently competent in that subject. </p>
+    <br>
+    <p> Click a button to return to a level! </p>
+    <input name="level" type="submit" value="LEVEL 1" />
+    <input name="level" type="submit" value="LEVEL 2" />
+  </form>
+    <br><br><br><br><br>
+    <p> By Cyrus Cursetjee and Ivan Wei </p>
+  <form method="get" action="about.html">
+    <input name="about" type="submit" value="ABOUT" />
+  </form>
 </div>
 
 
@@ -610,8 +653,177 @@ if level == 1:
   print(l1 + branch + close)
 
 if level == 2:
-  print(l2)
+  #root
+  root = Tree()
+  root.data = '''
+  <p> You walk out of homeroom, having received your schedule. </p>
+  <p> Surprisingly, you attend Freshman Composition and Concert Band and Spanish without incident. </p>
+  <p> As you leave Spanish, you display your true Freshman colors by shoveling through your bag to find your schedule. </p>
+  <p> It\'s not there! </p>
+  <p> You take a glance back into the classroom and it doesn\'t appear to be anywhere near your seat. </p>
+  <p> You have two choices: </p>
+  <p> Check in the band room and risk being late to your next class. </p>
+  <p> Take your phone out to check your schedule on Talos and risk getting caught by a bored teacher. </p>
 
+
+  <form method="get" action="trylevel2.py">
+    <br>
+    <input name="root.left" type="submit" value="Check the band room" />
+    <input name="root.right" type="submit" value="Check Talos" />
+  </form>
+  '''
+
+  branch = root.data
+
+  #check talos
+  root.right = Tree()
+  root.right.data = '''
+  <p> Why is it taking so long to load? You frantically glance around for teachers.</p>
+  <p> ... </p>
+  <p> After a minute, it finally loads! You take a quick look at your schedule when- </p>
+  <p> A shrill voice calls out, \"Give me that phone!\" </p>
+  <p> You glance up to see the most terrifying sight, a teacher in front of you. </p>
+  <p> \"But I was checking-\" </p>
+  <p> \"No excuses\". </p>
+  <p> You end up getting it confiscated on the first day, and still have no clue where to go. </p>
+  <p> You got BAMBOOZLED </p>
+
+  <form method="get" action="trylevel2.py">
+    <br>
+    <input name="root" type="submit" value="RESTART" />
+  </form>
+  '''
+
+  if form.getvalue("root.right")=="Check Talos":
+    branch = root.right.data
+
+  #check the band room
+  root.left = Tree()
+  root.left.data = '''
+  <p> Well, you better hurry soon. </p>
+  <p> You dash down the stairs to the bandroom. </p>
+  <p> On the second floor, there is a railing you could jump to potentially save time. </p>
+
+  <form method="get" action="trylevel2.py">
+    <br>
+    <input name="root.left.left" type="submit" value="Jump the railing" />
+    <input name="root.left.right" type="submit" value="Keep on running down" />
+  </form>
+  '''
+
+  if form.getvalue("root.left")=="Check the band room":
+    branch = root.left.data
+
+  root.left.left = Tree()
+  root.left.left.data = '''
+  <p> You swing one leg over the railing, and your success surprises you. </p>
+  <p> You attempt to conceal your internal celebrations. </p>
+  <p> When you swing the other one over, your crotch gets stuck on the railing, you tip over and fall. </p>
+  <p> Guess you celebrated a bit early. </p>
+  <p> Can\'t blame this one on our parents! </p>
+  <p> You made a stupid decision and FELL </p>
+
+  <form method="get" action="trylevel2.py">
+    <br>
+    <input name="root" type="submit" value="RESTART" />
+  </form>
+  '''
+
+  if form.getvalue("root.left.left")=="Jump the railing":
+    branch = root.left.left.data
+
+  root.left.right = Tree()
+  root.left.right.data = '''
+  <p> Both entrances to the first floor staircase are super close together, so you didn't waste too much time. </p>
+  <p> You see that the bandroom is mostly empty, except for a few people leaving and others waiting outside. </p>
+  <p> There are two doors too the band room, and you remember that you sat by the back. </p>
+
+  <form method="get" action="trylevel2.py">
+    <br>
+    <input name="root.left.right.left" type="submit" value="Go through the door by the percussions" />
+    <input name="root.left.right.right" type="submit" value="Go through the door by the flutes" />
+  </form>
+  '''
+
+  if form.getvalue("root.left.right")=="Keep on running down":
+    branch = root.left.right.data
+
+  root.left.right.left = Tree()
+  root.left.right.left.data = '''
+  <p> You make quite the dubious decision to enter on the left side. </p>
+  <p> You immediately regret it, having to trudge through and dodge plates, bowls, and kitchen utensils. Oh wait- that's a battery. </p>
+  <p> In a hurry, you don\'t see the large timpani covering that has been thrown to the floor. </p>
+  <p> It slides out underneath you and you fall. </p>
+  <p> You made a stupid decision and FELL </p>
+
+  <form method="get" action="trylevel2.py">
+    <br>
+    <input name="root" type="submit" value="RESTART" />
+  </form>
+  '''
+
+  if form.getvalue("root.left.right.left")=="Go through the door by the percussions":
+    branch = root.left.right.left.data
+
+  root.left.right.right = Tree()
+  root.left.right.right.data = '''
+  <p> You pass through the chairs on the flute side, and spot a piece of paper on the floor near your stand </p>
+  <p> That\'s your schedule!  You pick it up, and pour through the paper. </p>
+  <p> Your next class is Global History, on the third floor, room 305. </p>
+  <p> Pretty lucky! That\'s not too far from the band room. </p>
+  <p> You've still lost a fair amount of time, and you hustle back to the stairs. </p>
+  <p> You\'re fairly sure that the stairs are empty. </p>
+
+  <form method="get" action="trylevel2.py">
+    <br>
+    <input name="root.left.right.right.left" type="submit" value="Take the left staircase" />
+    <input name="root.left.right.right.right" type="submit" value="Take the right staircase" />
+  </form>
+  '''
+
+  if form.getvalue("root.left.right.right")=="Go through the door by the flutes":
+    branch = root.left.right.right.data
+
+  root.left.right.right.left = Tree()
+  root.left.right.right.left.data = '''
+  <p> You end up in the middle of a hallway, and glance up towards the room numbers
+  <p> You think: I'm looking for 305, I'm looking for 305, I'm lookin- </p>
+  <p> Wait a second. Why are the numbers increasing? </p>
+  <p> You start dashing towards the other wing of the floor, but as you are in the middle of the hallway- </p>
+  <p> RRIIIIIIIIIIINNNNNGGGGGGGGGGG!!!!!!! </p>
+  <p> You've RUN OUT OF TIME </p>
+
+  <form method="get" action="trylevel2.py">
+    <br>
+    <input name="root" type="submit" value="RESTART" />
+  </form>
+  '''
+
+  if form.getvalue("root.left.right.right.left")=="Take the left staircase":
+    branch = root.left.right.right.left.data
+
+  root.left.right.right.right = Tree()
+  root.left.right.right.right.data = '''
+  <p> You end up in the middle of the hallway, and Naruto into room 305. </p>
+  <p> Your teacher says hi. </p>
+  <p> Your teacher promises to curve you to 100 at the end of the semester. </p>
+  <p> Your teacher is genuinely happy to be here. </p>
+  <p> (Just kidding about the last bits) :P </p>
+
+  <form method="get" action="trylevel2.py">
+    <br>
+    <input name="level" type="submit" value="NEXT PHASE" />
+  </form>
+  '''
+
+  if form.getvalue("root.left.right.right.right")=="Take the right staircase":
+    branch = root.left.right.right.right.data
+
+  close = '''
+  </div>
+  </body>
+  </html>'''
+  print(l2 + branch + close)
 
 if level > 2:
   print(gameover)
