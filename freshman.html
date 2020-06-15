@@ -19,6 +19,22 @@ h6 {
 	margin:0;
 	padding:0;
 }
+p {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+}
+form {
+  text-align: center;
+}
+input {
+	background-color: black;
+	color: white;
+	border: 2px solid red;
+	border-radius: 4px
+	width: 40em;
+	height: 3em;
+}
 .regtext {
 	font-family: Arial, Helvetica, sans-serif;
 	color: white;
@@ -30,7 +46,7 @@ h6 {
 	display: block;
 	width: 100%;
 	height: auto;
-	position: fixed;
+	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 0;
@@ -54,7 +70,7 @@ h6 {
 }
 
 .text {
-	position: fixed;
+	position: absolute;
 	margin: 0;
 	top: 50%;
 	left: 50%;
@@ -74,17 +90,23 @@ h6 {
 <body>
 <div class="container">
 	<img src="stuybuilding.jpg" alt="Building" class="bgimage">
-<div class="overlay text">
-	<div class="akronim">
-		<h1>S U R V I V E</h1>
-		<h6>As an Incoming Stuy Freshman</h6>
-	</div>
-	<form method="get" action="freshman.py">
+	<div class="overlay text">
+		<div class="akronim">
+			<h1>S U R V I V E</h1>
+			<h6>As an Incoming Stuy Freshman</h6>
+		</div>
+		<form method="get" action="freshman.py">
+			<br><br><br><br><br>
+			<input name="play" type="submit" value="PLAY" />
+		</form>
 		<br><br><br><br><br>
-		<input name="play" type="submit" value="PLAY" />
-	</form>
+		<p> We use cookies to save your progress when you complete a phase! </p>
+		<p> By Cyrus Cursetjee and Ivan Wei </p>
+		<form method="get" action="about.html">
+			<input name="about" type="submit" value="ABOUT" />
+		</form>
 
-</div>
+	</div>
 </div>
 
 </body>
