@@ -12,7 +12,8 @@ if 'HTTP_COOKIE' in os.environ.keys():
   cookies = cookie_set.split(';')
   for acookie in cookies:
     if "level" in acookie:
-      level = int(acookie.strip()[-1])
+      level = int(acookie.strip()[6])
+      print('Set-Cookie: level={}'.format(level))
     else:
       level = 1
       print('Set-Cookie: level=1')
@@ -21,10 +22,6 @@ else:
   level = 1
   print('Set-Cookie: level=1')
 
-if form.getvalue("level") == "NEXT PHASE":
-  level += 1
-  print('Set-Cookie: level={}'.format(level))
-
 if form.getvalue("level") == "LEVEL 1":
   level = 1
   print('Set-Cookie: level=1')
@@ -32,6 +29,10 @@ if form.getvalue("level") == "LEVEL 1":
 if form.getvalue("level") == "LEVEL 2":
   level = 2
   print('Set-Cookie: level=2')
+
+if form.getvalue("level") == "LEVEL 3":
+  level = 3
+  print('Set-Cookie: level=3')
 
 l1='''
 <!DOCTYPE html>
@@ -592,7 +593,7 @@ if level == 1:
 
   <form method="get" action="freshman.py">
     <br>
-    <input name="level" type="submit" value="NEXT PHASE" />
+    <input name="level" type="submit" value="LEVEL 2" />
   </form>
   '''
 
@@ -666,7 +667,7 @@ if level == 2:
   <p> Take your phone out to check your schedule on Talos and risk getting caught by a bored teacher. </p>
 
 
-  <form method="get" action="trylevel2.py">
+  <form method="get" action="freshman.py">
     <br>
     <input name="root.left" type="submit" value="Check the band room" />
     <input name="root.right" type="submit" value="Check Talos" />
@@ -688,7 +689,7 @@ if level == 2:
   <p> You end up getting it confiscated on the first day, and still have no clue where to go. </p>
   <p> You got BAMBOOZLED </p>
 
-  <form method="get" action="trylevel2.py">
+  <form method="get" action="freshman.py">
     <br>
     <input name="root" type="submit" value="RESTART" />
   </form>
@@ -704,7 +705,7 @@ if level == 2:
   <p> You dash down the stairs to the bandroom. </p>
   <p> On the second floor, there is a railing you could jump to potentially save time. </p>
 
-  <form method="get" action="trylevel2.py">
+  <form method="get" action="freshman.py">
     <br>
     <input name="root.left.left" type="submit" value="Jump the railing" />
     <input name="root.left.right" type="submit" value="Keep on running down" />
@@ -723,7 +724,7 @@ if level == 2:
   <p> Can\'t blame this one on our parents! </p>
   <p> You made a stupid decision and FELL </p>
 
-  <form method="get" action="trylevel2.py">
+  <form method="get" action="freshman.py">
     <br>
     <input name="root" type="submit" value="RESTART" />
   </form>
@@ -738,7 +739,7 @@ if level == 2:
   <p> You see that the bandroom is mostly empty, except for a few people leaving and others waiting outside. </p>
   <p> There are two doors too the band room, and you remember that you sat by the back. </p>
 
-  <form method="get" action="trylevel2.py">
+  <form method="get" action="freshman.py">
     <br>
     <input name="root.left.right.left" type="submit" value="Go through the door by the percussions" />
     <input name="root.left.right.right" type="submit" value="Go through the door by the flutes" />
@@ -756,7 +757,7 @@ if level == 2:
   <p> It slides out underneath you and you fall. </p>
   <p> You made a stupid decision and FELL </p>
 
-  <form method="get" action="trylevel2.py">
+  <form method="get" action="freshman.py">
     <br>
     <input name="root" type="submit" value="RESTART" />
   </form>
@@ -774,7 +775,7 @@ if level == 2:
   <p> You've still lost a fair amount of time, and you hustle back to the stairs. </p>
   <p> You\'re fairly sure that the stairs are empty. </p>
 
-  <form method="get" action="trylevel2.py">
+  <form method="get" action="freshman.py">
     <br>
     <input name="root.left.right.right.left" type="submit" value="Take the left staircase" />
     <input name="root.left.right.right.right" type="submit" value="Take the right staircase" />
@@ -793,7 +794,7 @@ if level == 2:
   <p> RRIIIIIIIIIIINNNNNGGGGGGGGGGG!!!!!!! </p>
   <p> You've RUN OUT OF TIME </p>
 
-  <form method="get" action="trylevel2.py">
+  <form method="get" action="freshman.py">
     <br>
     <input name="root" type="submit" value="RESTART" />
   </form>
@@ -810,9 +811,9 @@ if level == 2:
   <p> Your teacher is genuinely happy to be here. </p>
   <p> (Just kidding about the last bits) :P </p>
 
-  <form method="get" action="trylevel2.py">
+  <form method="get" action="freshman.py">
     <br>
-    <input name="level" type="submit" value="NEXT PHASE" />
+    <input name="level" type="submit" value="LEVEL 3" />
   </form>
   '''
 
